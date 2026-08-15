@@ -8,14 +8,32 @@ export default function HomePage() {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    Promise.all([
-      API.get('/properties/featured'),
-      API.get('/services'),
-    ]).then(([pRes, sRes]) => {
-      setProperties(pRes.data);
-      setServices(sRes.data);
-    }).catch(console.error);
-  }, []);
+  Promise.all([
+    API.get('/properties/featured'),
+    API.get('/services'),
+  ])
+    .then(([pRes, sRes]) => {
+      const propertiesData = Array.isArray(pRes.data)
+        ? pRes.data
+        : Array.isArray(pRes.data?.properties)
+          ? pRes.data.properties
+          : [];
+
+      const servicesData = Array.isArray(sRes.data)
+        ? sRes.data
+        : Array.isArray(sRes.data?.services)
+          ? sRes.data.services
+          : [];
+
+      setProperties(propertiesData);
+      setServices(servicesData);
+    })
+    .catch((error) => {
+      console.error('Failed to load homepage data:', error);
+      setProperties([]);
+      setServices([]);
+    });
+}, []);
 
   // Trigger reveal animations after data loads
   useEffect(() => {
@@ -64,7 +82,7 @@ export default function HomePage() {
             <p>Hand-selected listings across our key markets</p>
           </div>
           <div className="grid-listings">
-            {properties.slice(0, 4).map((p, i) => (
+            {Array.isArray(properties) && properties.slice(0, 4).map((p, i) => (
               <PropertyCard key={p._id} property={p} index={i} />
             ))}
           </div>
@@ -83,7 +101,7 @@ export default function HomePage() {
             <p>End-to-end representation across four international markets</p>
           </div>
           <div className="grid-services">
-            {services.slice(0, 4).map((s, i) => (
+            {Array.isArray(services) && services.slice(0, 4).map((s, i) => (
               <div key={s._id} className={`svc reveal ${i === 1 ? 'd1' : i === 2 ? 'd2' : i === 3 ? 'd3' : ''}`}>
                 <div className="svc-icon"><i className={`fa-solid ${s.icon}`}></i></div>
                 <h3>{s.title}</h3>
