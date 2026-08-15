@@ -5,10 +5,22 @@ import RevealOnScroll from '../components/RevealOnScroll';
 
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    API.get('/services').then(r => setServices(r.data)).catch(() => {});
     window.scrollTo(0, 0);
+    setLoading(true);
+    API.get('/services')
+      .then(r => {
+        const list = Array.isArray(r.data)
+          ? r.data
+          : Array.isArray(r.data?.services)
+            ? r.data.services
+            : [];
+        setServices(list);
+      })
+      .catch(() => setServices([]))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -19,6 +31,8 @@ export default function ServicesPage() {
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
   }, [services]);
+
+  const safeServices = Array.isArray(services) ? services : [];
 
   return (
     <div className="page-transition">
@@ -32,16 +46,20 @@ export default function ServicesPage() {
 
       <section className="section services">
         <div className="container">
-          <div className="grid-services">
-            {services.map((s, i) => (
-              <div key={s._id} className={`svc reveal ${['', 'd1', 'd2', 'd3'][i] || ''}`}>
-                <div className="svc-icon"><i className={`fa-solid ${s.icon}`}></i></div>
-                <h3>{s.title}</h3>
-                <p>{s.description}</p>
-                <Link className="svc-link" to="/contact">{s.linkText || 'Learn More'} <i className="fa-solid fa-arrow-right-long"></i></Link>
-              </div>
-            ))}
-          </div>
+          {loading ? (
+            <div className="loading"><div className="spinner"></div></div>
+          ) : (
+            <div className="grid-services">
+              {safeServices.map((s, i) => (
+                <div key={s._id || i} className={`svc reveal ${['', 'd1', 'd2', 'd3'][i % 4] || ''}`}>
+                  <div className="svc-icon"><i className={`fa-solid ${s.icon}`}></i></div>
+                  <h3>{s.title}</h3>
+                  <p>{s.description}</p>
+                  <Link className="svc-link" to="/contact">{s.linkText || 'Learn More'} <i className="fa-solid fa-arrow-right-long"></i></Link>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

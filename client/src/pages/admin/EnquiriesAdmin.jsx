@@ -8,7 +8,14 @@ export default function EnquiriesAdmin() {
   const fetchEnquiries = () => {
     setLoading(true);
     API.get('/enquiries')
-      .then((res) => setEnquiries(res.data))
+      .then((res) => {
+        const list = Array.isArray(res.data)
+          ? res.data
+          : Array.isArray(res.data?.enquiries)
+            ? res.data.enquiries
+            : [];
+        setEnquiries(list);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   };
@@ -28,6 +35,8 @@ export default function EnquiriesAdmin() {
   };
 
   if (loading) return <div className="loading"><div className="spinner"></div></div>;
+
+  const safeEnquiries = Array.isArray(enquiries) ? enquiries : [];
 
   return (
     <div className="page-transition">
@@ -50,9 +59,9 @@ export default function EnquiriesAdmin() {
             </tr>
           </thead>
           <tbody>
-            {enquiries.map((e) => (
-              <tr key={e._id} style={e.read ? {} : { fontWeight: '600', backgroundColor: 'rgba(201,168,76,.03)' }}>
-                <td style={{ fontSize: '.8rem' }}>{new Date(e.createdAt).toLocaleDateString()}</td>
+            {safeEnquiries.map((e, i) => (
+              <tr key={e._id || i} style={e.read ? {} : { fontWeight: '600', backgroundColor: 'rgba(201,168,76,.03)' }}>
+                <td style={{ fontSize: '.8rem' }}>{e.createdAt ? new Date(e.createdAt).toLocaleDateString() : '—'}</td>
                 <td>{e.name}</td>
                 <td><a href={`mailto:${e.email}`} style={{ color: 'var(--gold-dark)', textDecoration: 'underline' }}>{e.email}</a></td>
                 <td>
@@ -79,7 +88,7 @@ export default function EnquiriesAdmin() {
                 </td>
               </tr>
             ))}
-            {enquiries.length === 0 && (
+            {safeEnquiries.length === 0 && (
               <tr>
                 <td colSpan="7" style={{ textAlign: 'center', color: 'var(--muted)', padding: '24px' }}>
                   No enquiries found.

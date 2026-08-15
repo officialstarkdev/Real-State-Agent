@@ -8,7 +8,14 @@ export default function ContactsAdmin() {
   const fetchContacts = () => {
     setLoading(true);
     API.get('/contacts')
-      .then((res) => setContacts(res.data))
+      .then((res) => {
+        const list = Array.isArray(res.data)
+          ? res.data
+          : Array.isArray(res.data?.contacts)
+            ? res.data.contacts
+            : [];
+        setContacts(list);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   };
@@ -40,6 +47,8 @@ export default function ContactsAdmin() {
 
   if (loading) return <div className="loading"><div className="spinner"></div></div>;
 
+  const safeContacts = Array.isArray(contacts) ? contacts : [];
+
   return (
     <div className="page-transition">
       <div className="admin-header">
@@ -62,9 +71,9 @@ export default function ContactsAdmin() {
             </tr>
           </thead>
           <tbody>
-            {contacts.map((c) => (
-              <tr key={c._id} style={c.read ? {} : { fontWeight: '600', backgroundColor: 'rgba(201,168,76,.03)' }}>
-                <td style={{ fontSize: '.8rem' }}>{new Date(c.createdAt).toLocaleDateString()}</td>
+            {safeContacts.map((c, i) => (
+              <tr key={c._id || i} style={c.read ? {} : { fontWeight: '600', backgroundColor: 'rgba(201,168,76,.03)' }}>
+                <td style={{ fontSize: '.8rem' }}>{c.createdAt ? new Date(c.createdAt).toLocaleDateString() : '—'}</td>
                 <td>{c.name}</td>
                 <td><a href={`mailto:${c.email}`} style={{ color: 'var(--gold-dark)', textDecoration: 'underline' }}>{c.email}</a></td>
                 <td>{c.countryCode} {c.phone}</td>
@@ -85,7 +94,7 @@ export default function ContactsAdmin() {
                 </td>
               </tr>
             ))}
-            {contacts.length === 0 && (
+            {safeContacts.length === 0 && (
               <tr>
                 <td colSpan="8" style={{ textAlign: 'center', color: 'var(--muted)', padding: '24px' }}>
                   No contacts found.

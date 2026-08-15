@@ -48,7 +48,8 @@ export default function PropertyDetailPage() {
 
   const setGallery = useCallback((i) => {
     if (!property) return;
-    const len = property.images.length;
+    const images = Array.isArray(property?.images) ? property.images : typeof property?.images === 'string' ? [property.images] : [];
+    const len = images.length || 1;
     const next = ((i % len) + len) % len;
     setFading(true);
     setTimeout(() => { setGIndex(next); setFading(false); }, 160);
@@ -83,7 +84,23 @@ export default function PropertyDetailPage() {
   if (!property) return null;
 
   const p = property;
-  const details = p.details instanceof Map ? Object.fromEntries(p.details) : (p.details || {});
+  const images = Array.isArray(p?.images) ? p.images : typeof p?.images === 'string' ? [p.images] : [];
+  const activeImage = images[gIndex] || images[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80';
+  
+  const descList = Array.isArray(p?.desc)
+    ? p.desc
+    : typeof p?.desc === 'string'
+      ? p.desc.split('\n\n').filter(Boolean)
+      : [];
+
+  const featuresList = Array.isArray(p?.features)
+    ? p.features
+    : typeof p?.features === 'string'
+      ? p.features.split(',').map(s => s.trim()).filter(Boolean)
+      : [];
+
+  const details = p.details instanceof Map ? Object.fromEntries(p.details) : (p.details && typeof p.details === 'object' ? p.details : {});
+  const similarList = Array.isArray(similar) ? similar : [];
 
   return (
     <div className="page-transition" style={{ paddingTop: 140, paddingBottom: 80 }}>
@@ -112,30 +129,36 @@ export default function PropertyDetailPage() {
         <div className="gallery">
           <div className="gallery-main">
             <img
-              src={p.images[gIndex]}
+              src={activeImage}
               alt={`${p.title} — photo ${gIndex + 1}`}
               className={fading ? 'fading' : ''}
             />
-            <button className="g-arrow prev" onClick={() => setGallery(gIndex - 1)} aria-label="Previous photo">
-              <i className="fa-solid fa-chevron-left"></i>
-            </button>
-            <button className="g-arrow next" onClick={() => setGallery(gIndex + 1)} aria-label="Next photo">
-              <i className="fa-solid fa-chevron-right"></i>
-            </button>
-            <span className="g-counter">{gIndex + 1} / {p.images.length}</span>
+            {images.length > 1 && (
+              <>
+                <button className="g-arrow prev" onClick={() => setGallery(gIndex - 1)} aria-label="Previous photo">
+                  <i className="fa-solid fa-chevron-left"></i>
+                </button>
+                <button className="g-arrow next" onClick={() => setGallery(gIndex + 1)} aria-label="Next photo">
+                  <i className="fa-solid fa-chevron-right"></i>
+                </button>
+                <span className="g-counter">{gIndex + 1} / {images.length}</span>
+              </>
+            )}
           </div>
-          <div className="gallery-thumbs">
-            {p.images.map((src, k) => (
-              <button
-                key={k}
-                className={k === gIndex ? 'active' : ''}
-                onClick={() => setGallery(k)}
-                aria-label={`View photo ${k + 1}`}
-              >
-                <img src={src.replace('w=1400', 'w=400')} alt="" />
-              </button>
-            ))}
-          </div>
+          {images.length > 1 && (
+            <div className="gallery-thumbs">
+              {images.map((src, k) => (
+                <button
+                  key={k}
+                  className={k === gIndex ? 'active' : ''}
+                  onClick={() => setGallery(k)}
+                  aria-label={`View photo ${k + 1}`}
+                >
+                  <img src={src.replace('w=1400', 'w=400')} alt="" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="detail-grid">
@@ -151,33 +174,39 @@ export default function PropertyDetailPage() {
             </div>
 
             {/* Description */}
-            <div className="dsection">
-              <h2 className="serif">About This Property</h2>
-              <div className="gold-rule"></div>
-              {p.desc.map((d, i) => <p key={i}>{d}</p>)}
-            </div>
+            {descList.length > 0 && (
+              <div className="dsection">
+                <h2 className="serif">About This Property</h2>
+                <div className="gold-rule"></div>
+                {descList.map((d, i) => <p key={i}>{d}</p>)}
+              </div>
+            )}
 
             {/* Features */}
-            <div className="dsection">
-              <h2 className="serif">Features &amp; Amenities</h2>
-              <div className="gold-rule"></div>
-              <div className="feat-grid">
-                {p.features.map((f, i) => (
-                  <div key={i} className="feat"><i className="fa-solid fa-check"></i>{f}</div>
-                ))}
+            {featuresList.length > 0 && (
+              <div className="dsection">
+                <h2 className="serif">Features &amp; Amenities</h2>
+                <div className="gold-rule"></div>
+                <div className="feat-grid">
+                  {featuresList.map((f, i) => (
+                    <div key={i} className="feat"><i className="fa-solid fa-check"></i>{f}</div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Details Table */}
-            <div className="dsection">
-              <h2 className="serif">Property Details</h2>
-              <div className="gold-rule"></div>
-              <div className="dtable">
-                {Object.entries(details).map(([k, v]) => (
-                  <div key={k} className="drow"><span>{k}</span><span>{v}</span></div>
-                ))}
+            {Object.keys(details).length > 0 && (
+              <div className="dsection">
+                <h2 className="serif">Property Details</h2>
+                <div className="gold-rule"></div>
+                <div className="dtable">
+                  {Object.entries(details).map(([k, v]) => (
+                    <div key={k} className="drow"><span>{k}</span><span>{v}</span></div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Map */}
             <div className="dsection">
@@ -233,11 +262,11 @@ export default function PropertyDetailPage() {
         </div>
 
         {/* Similar Properties */}
-        {similar.length > 0 && (
+        {similarList.length > 0 && (
           <div className="similar">
             <h2 className="serif">Similar Properties</h2>
             <div className="grid-listings">
-              {similar.map((sp, i) => <PropertyCard key={sp._id} property={sp} index={i} />)}
+              {similarList.map((sp, i) => <PropertyCard key={sp._id || i} property={sp} index={i} />)}
             </div>
           </div>
         )}

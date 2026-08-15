@@ -26,11 +26,23 @@ export default function ListingsPage() {
       if (filters.market) params.market = filters.market;
       if (filters.status) params.status = filters.status;
       const { data } = await API.get('/properties', { params });
-      setProperties(data.properties);
-      setTotal(data.total);
-      setPages(data.pages);
-      setPage(data.page);
-    } catch { setProperties([]); }
+      
+      const propList = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.properties)
+          ? data.properties
+          : [];
+      
+      setProperties(propList);
+      setTotal(data?.total ?? propList.length);
+      setPages(data?.pages ?? 1);
+      setPage(data?.page ?? p);
+    } catch {
+      setProperties([]);
+      setTotal(0);
+      setPages(1);
+      setPage(1);
+    }
     setLoading(false);
   };
 
@@ -49,6 +61,8 @@ export default function ListingsPage() {
     e.preventDefault();
     fetchProperties(1);
   };
+
+  const safeList = Array.isArray(properties) ? properties : [];
 
   return (
     <div className="page-transition">
@@ -92,14 +106,14 @@ export default function ListingsPage() {
 
           {loading ? (
             <div className="loading"><div className="spinner"></div></div>
-          ) : properties.length > 0 ? (
+          ) : safeList.length > 0 ? (
             <>
               <p style={{ color: 'var(--muted)', marginBottom: 24, fontSize: '.9rem' }}>
-                Showing {properties.length} of {total} properties
+                Showing {safeList.length} of {total} properties
               </p>
               <div className="grid-listings">
-                {properties.map((p, i) => (
-                  <PropertyCard key={p._id} property={p} index={i} />
+                {safeList.map((p, i) => (
+                  <PropertyCard key={p._id || i} property={p} index={i} />
                 ))}
               </div>
               {pages > 1 && (

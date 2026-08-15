@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function TestimonialCarousel({ testimonials }) {
+  const list = Array.isArray(testimonials) ? testimonials : [];
   const [index, setIndex] = useState(0);
   const timerRef = useRef(null);
   const carouselRef = useRef(null);
   const startXRef = useRef(null);
-  const slides = testimonials.length;
+  const slides = list.length || 1;
 
   const go = useCallback((i) => {
     setIndex(((i % slides) + slides) % slides);
@@ -13,13 +14,16 @@ export default function TestimonialCarousel({ testimonials }) {
 
   const restart = useCallback(() => {
     clearInterval(timerRef.current);
+    if (slides <= 1) return;
     timerRef.current = setInterval(() => go(index + 1), 4000);
-  }, [go, index]);
+  }, [go, index, slides]);
 
   useEffect(() => {
     restart();
     return () => clearInterval(timerRef.current);
   }, [restart]);
+
+  if (list.length === 0) return null;
 
   const handlePrev = () => { go(index - 1); restart(); };
   const handleNext = () => { go(index + 1); restart(); };
@@ -43,11 +47,11 @@ export default function TestimonialCarousel({ testimonials }) {
       onTouchEnd={handleTouchEnd}
     >
       <div className="track" style={{ transform: `translateX(-${index * 100}%)` }}>
-        {testimonials.map((t, i) => (
+        {list.map((t, i) => (
           <div className="slide" key={t._id || i}>
             <div className="tcard">
               <span className="quote-mark">&ldquo;</span>
-              <div className="stars">{'★'.repeat(t.rating)}</div>
+              <div className="stars">{'★'.repeat(t.rating || 5)}</div>
               <blockquote>{t.quote}</blockquote>
               <div className="tmeta">
                 <div className="avatar">{t.initials}</div>
@@ -65,7 +69,7 @@ export default function TestimonialCarousel({ testimonials }) {
           <i className="fa-solid fa-arrow-left"></i>
         </button>
         <div className="dots" role="tablist" aria-label="Testimonial slides">
-          {testimonials.map((_, i) => (
+          {list.map((_, i) => (
             <button
               key={i}
               className={`dot${i === index ? ' active' : ''}`}

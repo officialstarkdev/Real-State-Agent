@@ -14,7 +14,14 @@ export default function TestimonialsAdmin() {
   const fetchTestimonials = () => {
     setLoading(true);
     API.get('/testimonials')
-      .then((res) => setTestimonials(res.data))
+      .then((res) => {
+        const list = Array.isArray(res.data)
+          ? res.data
+          : Array.isArray(res.data?.testimonials)
+            ? res.data.testimonials
+            : [];
+        setTestimonials(list);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   };
@@ -73,6 +80,8 @@ export default function TestimonialsAdmin() {
   };
 
   if (loading && !isEditing) return <div className="loading"><div className="spinner"></div></div>;
+
+  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
 
   return (
     <div className="page-transition">
@@ -155,15 +164,15 @@ export default function TestimonialsAdmin() {
               </tr>
             </thead>
             <tbody>
-              {testimonials.map((t) => (
-                <tr key={t._id}>
+              {safeTestimonials.map((t, i) => (
+                <tr key={t._id || i}>
                   <td>
                     <div className="avatar" style={{ width: '38px', height: '38px', fontSize: '.8rem' }}>{t.initials}</div>
                   </td>
                   <td style={{ fontWeight: '600' }}>{t.name}</td>
                   <td>{t.subtitle}</td>
                   <td style={{ maxWidth: '300px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{t.quote}</td>
-                  <td style={{ color: 'var(--gold)' }}>{'★'.repeat(t.rating)}</td>
+                  <td style={{ color: 'var(--gold)' }}>{'★'.repeat(t.rating || 5)}</td>
                   <td>{t.order}</td>
                   <td className="actions">
                     <button onClick={() => handleEdit(t)}><i className="fa-solid fa-pen-to-square"></i> Edit</button>
@@ -171,7 +180,7 @@ export default function TestimonialsAdmin() {
                   </td>
                 </tr>
               ))}
-              {testimonials.length === 0 && (
+              {safeTestimonials.length === 0 && (
                 <tr>
                   <td colSpan="7" style={{ textAlign: 'center', color: 'var(--muted)', padding: '24px' }}>
                     No testimonials found.

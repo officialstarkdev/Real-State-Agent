@@ -14,7 +14,14 @@ export default function ServicesAdmin() {
   const fetchServices = () => {
     setLoading(true);
     API.get('/services')
-      .then((res) => setServices(res.data))
+      .then((res) => {
+        const list = Array.isArray(res.data)
+          ? res.data
+          : Array.isArray(res.data?.services)
+            ? res.data.services
+            : [];
+        setServices(list);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   };
@@ -71,6 +78,8 @@ export default function ServicesAdmin() {
   };
 
   if (loading && !isEditing) return <div className="loading"><div className="spinner"></div></div>;
+
+  const safeServices = Array.isArray(services) ? services : [];
 
   return (
     <div className="page-transition">
@@ -134,8 +143,8 @@ export default function ServicesAdmin() {
               </tr>
             </thead>
             <tbody>
-              {services.map((s) => (
-                <tr key={s._id}>
+              {safeServices.map((s, i) => (
+                <tr key={s._id || i}>
                   <td style={{ fontSize: '1.25rem', color: 'var(--gold-dark)' }}><i className={`fa-solid ${s.icon}`}></i></td>
                   <td style={{ fontWeight: '600' }}>{s.title}</td>
                   <td style={{ maxWidth: '400px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.description}</td>
@@ -146,7 +155,7 @@ export default function ServicesAdmin() {
                   </td>
                 </tr>
               ))}
-              {services.length === 0 && (
+              {safeServices.length === 0 && (
                 <tr>
                   <td colSpan="5" style={{ textAlign: 'center', color: 'var(--muted)', padding: '24px' }}>
                     No services found.

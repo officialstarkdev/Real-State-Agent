@@ -19,7 +19,14 @@ export default function PropertiesAdmin() {
   const fetchProperties = () => {
     setLoading(true);
     API.get('/properties?limit=100')
-      .then((res) => setProperties(res.data.properties))
+      .then((res) => {
+        const list = Array.isArray(res.data)
+          ? res.data
+          : Array.isArray(res.data?.properties)
+            ? res.data.properties
+            : [];
+        setProperties(list);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   };
@@ -34,7 +41,7 @@ export default function PropertiesAdmin() {
 
     // Convert map/object details back to string key:val
     let detStr = '';
-    const detailsObj = prop.details instanceof Map ? Object.fromEntries(prop.details) : (prop.details || {});
+    const detailsObj = prop.details instanceof Map ? Object.fromEntries(prop.details) : (prop.details && typeof prop.details === 'object' ? prop.details : {});
     Object.entries(detailsObj).forEach(([k, v]) => {
       detStr += `${k}:${v}\n`;
     });
@@ -55,9 +62,9 @@ export default function PropertiesAdmin() {
       area: prop.area || '',
       land: prop.land || '—',
       year: prop.year || new Date().getFullYear(),
-      images: prop.images ? prop.images.join('\n') : '',
-      desc: prop.desc ? prop.desc.join('\n\n') : '',
-      features: prop.features ? prop.features.join(', ') : '',
+      images: Array.isArray(prop.images) ? prop.images.join('\n') : (typeof prop.images === 'string' ? prop.images : ''),
+      desc: Array.isArray(prop.desc) ? prop.desc.join('\n\n') : (typeof prop.desc === 'string' ? prop.desc : ''),
+      features: Array.isArray(prop.features) ? prop.features.join(', ') : (typeof prop.features === 'string' ? prop.features : ''),
       mapTitle: prop.mapTitle || '',
       mapNote: prop.mapNote || '',
       featured: prop.featured || false,
@@ -132,6 +139,8 @@ export default function PropertiesAdmin() {
   };
 
   if (loading && !isEditing) return <div className="loading"><div className="spinner"></div></div>;
+
+  const safeProperties = Array.isArray(properties) ? properties : [];
 
   return (
     <div className="page-transition">
@@ -293,7 +302,7 @@ export default function PropertiesAdmin() {
               </tr>
             </thead>
             <tbody>
-              {properties.map((p) => (
+              {safeProperties.map((p) => (
                 <tr key={p._id}>
                   <td style={{ fontWeight: '600' }}>{p.title}</td>
                   <td>{p.flag} {p.market}</td>
@@ -310,7 +319,7 @@ export default function PropertiesAdmin() {
                   </td>
                 </tr>
               ))}
-              {properties.length === 0 && (
+              {safeProperties.length === 0 && (
                 <tr>
                   <td colSpan="6" style={{ textAlign: 'center', color: 'var(--muted)', padding: '24px' }}>
                     No properties added yet.
