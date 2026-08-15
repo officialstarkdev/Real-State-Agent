@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harrington Property Group — Luxury Real Estate | AU · US · UK · Gulf</title>
+<meta name="description" content="James Harrington — luxury & residential property specialist serving Australia, the United States, the United Kingdom and the Gulf region.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+/* ============ TOKENS & RESET ============ */
+:root{
+  --navy:#0A1628;
+  --navy-2:#101F35;
+  --navy-3:#16273F;
+  --gold:#C9A84C;
+  --gold-dark:#B2913A;
+  --gold-light:#E3CE8F;
+  --white:#FFFFFF;
+  --grey:#F5F5F5;
+  --ink:#22293A;
+  --muted:#5C6678;
+  --line:rgba(10,22,40,.09);
+  --shadow-sm:0 4px 18px rgba(10,22,40,.08);
+  --shadow-md:0 14px 40px rgba(10,22,40,.12);
+  --shadow-lg:0 24px 70px rgba(10,22,40,.18);
+  --radius:10px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;color:var(--navy);line-height:1.18}
+.container{width:min(1180px,92%);margin-inline:auto}
+
+/* Section rhythm */
+.section{padding:104px 0}
+@media(max-width:768px){.section{padding:72px 0}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold-dark);margin-bottom:16px;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+.section-head{max-width:640px;margin-bottom:56px}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head.center .eyebrow::after{content:"";width:34px;height:1px;background:var(--gold)}
+.section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:600;margin-bottom:14px}
+.section-head p{color:var(--muted);font-size:1.02rem}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 32px;border-radius:6px;border:1px solid transparent;
+  font-size:.9rem;font-weight:600;letter-spacing:.04em;
+  transition:all .3s var(--ease);white-space:nowrap;
+}
+.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-gold:hover{background:var(--gold-dark);border-color:var(--gold-dark);transform:translateY(-2px) scale(1.02);box-shadow:0 10px 26px rgba(201,168,76,.35)}
+.btn-outline-light{background:transparent;color:var(--white);border-color:rgba(255,255,255,.65)}
+.btn-outline-light:hover{background:var(--white);color:var(--navy);transform:translateY(-2px) scale(1.02)}
+.btn-outline-navy{background:transparent;color:var(--navy);border-color:var(--navy)}
+.btn-outline-navy:hover{background:var(--navy);color:var(--white);transform:translateY(-2px) scale(1.02)}
+.btn-whatsapp{background:#25D366;color:#fff;border-color:#25D366}
+.btn-whatsapp:hover{background:#1EBE5A;transform:translateY(-2px) scale(1.02);box-shadow:0 10px 26px rgba(37,211,102,.35)}
+
+/* Reveal animation (Intersection Observer) */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}
+.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation:none!important;transition-duration:.01ms!important}
+}
+
+/* ============ 1. NAVIGATION ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:1000;
+  padding:22px 0;background:transparent;
+  transition:background .35s var(--ease),padding .35s var(--ease),box-shadow .35s var(--ease);
+}
+.nav.scrolled{background:var(--navy);padding:14px 0;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.22rem;color:var(--white);letter-spacing:.01em}
+.brand-name span{color:var(--gold)}
+.brand-rule{width:52px;height:2px;background:var(--gold);margin-top:6px}
+.nav-links{display:flex;align-items:center;gap:34px}
+.nav-links a{
+  color:rgba(255,255,255,.85);font-size:.88rem;font-weight:500;letter-spacing:.03em;
+  position:relative;padding:4px 0;transition:color .25s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-2px;width:0;height:1.5px;
+  background:var(--gold);transition:width .3s var(--ease);
+}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:11px 24px;font-size:.82rem}
+.hamburger{
+  display:none;background:none;border:0;width:42px;height:42px;
+  flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:transform .3s var(--ease),opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mobile-menu{
+  position:fixed;inset:0;z-index:990;background:var(--navy);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s;
+}
+.mobile-menu.open{opacity:1;visibility:visible}
+.mobile-menu a{
+  color:var(--white);font-family:'Playfair Display',serif;font-size:1.6rem;padding:12px;
+  opacity:0;transform:translateY(14px);transition:opacity .4s var(--ease),transform .4s var(--ease),color .25s;
+}
+.mobile-menu.open a{opacity:1;transform:translateY(0)}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .btn{margin-top:18px;font-family:'Inter',sans-serif;font-size:.9rem}
+@media(max-width:960px){
+  .nav-links,.nav .nav-cta{display:none}
+  .hamburger{display:flex}
+}
+
+/* ============ 2. HERO ============ */
+.hero{
+  min-height:100vh;min-height:100svh;
+  display:flex;align-items:center;
+  position:relative;color:var(--white);
+  background:
+    linear-gradient(rgba(10,22,40,.7),rgba(10,22,40,.7)),
+    url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+  padding:140px 0 160px;
+}
+.hero-inner{max-width:820px}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:.76rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light);
+  margin-bottom:26px;animation:heroUp .9s var(--ease) both .1s;
+}
+.hero-kicker::before,.hero-kicker::after{content:"";width:38px;height:1px;background:var(--gold)}
+.hero h1{
+  color:var(--white);font-size:clamp(2.5rem,6vw,4.4rem);font-weight:600;
+  margin-bottom:22px;animation:heroUp .9s var(--ease) both .25s;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{
+  font-size:clamp(1rem,1.6vw,1.2rem);color:rgba(255,255,255,.82);font-weight:300;
+  margin-bottom:38px;animation:heroUp .9s var(--ease) both .4s;
+}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;animation:heroUp .9s var(--ease) both .55s}
+.trust-row{
+  display:flex;gap:34px;flex-wrap:wrap;margin-top:52px;
+  animation:heroUp .9s var(--ease) both .7s;
+}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:.9rem;color:rgba(255,255,255,.88);font-weight:500}
+.trust-item .em{font-size:1.1rem}
+.trust-item + .trust-item{border-left:1px solid rgba(255,255,255,.22);padding-left:34px}
+@keyframes heroUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.hero-scroll{
+  position:absolute;left:50%;bottom:110px;transform:translateX(-50%);
+  color:rgba(255,255,255,.6);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.hero-scroll::after{content:"";width:1px;height:40px;background:linear-gradient(var(--gold),transparent);animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:768px){
+  .trust-item + .trust-item{border-left:0;padding-left:0}
+  .hero-scroll{display:none}
+  .hero{padding-bottom:120px}
+}
+
+/* ============ 3. SEARCH BAR ============ */
+.search-wrap{position:relative;z-index:20;margin-top:-78px}
+.search-card{
+  background:var(--white);border-radius:var(--radius);
+  box-shadow:var(--shadow-md);padding:26px;
+  display:grid;grid-template-columns:1.3fr 1fr 1fr auto auto;gap:16px;align-items:end;
+  border-top:3px solid var(--gold);
+}
+.field label{
+  display:block;font-size:.68rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+}
+.field input,.field select{
+  width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:6px;
+  font-family:'Inter',sans-serif;font-size:.92rem;color:var(--ink);background:var(--white);
+  transition:border-color .25s,box-shadow .25s;appearance:none;
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235C6678'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;cursor:pointer;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.18)}
+.toggle{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.toggle button{
+  padding:13px 22px;border:0;background:var(--white);color:var(--muted);
+  font-size:.88rem;font-weight:600;transition:all .25s;
+}
+.toggle button.active{background:var(--navy);color:var(--white)}
+.search-card .btn{padding:14px 30px}
+.search-note{
+  margin-top:14px;text-align:center;font-size:.78rem;color:var(--muted);
+  opacity:0;transition:opacity .4s;
+}
+.search-note.show{opacity:1}
+@media(max-width:1024px){.search-card{grid-template-columns:1fr 1fr;padding:22px}.search-card .btn{grid-column:1/-1}}
+@media(max-width:560px){.search-card{grid-template-columns:1fr}.search-wrap{margin-top:-60px}}
+
+/* ============ 4. LISTINGS ============ */
+.listings{padding-top:120px}
+.grid-listings{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media(max-width:1024px){.grid-listings{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid-listings{grid-template-columns:1fr}}
+.card{
+  background:var(--white);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:box-shadow .35s var(--ease),transform .35s var(--ease);
+  display:flex;flex-direction:column;
+}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-6px)}
+.card-media{position:relative;overflow:hidden;aspect-ratio:4/3}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.card:hover .card-media img{transform:scale(1.08)}
+.badge{
+  position:absolute;top:16px;left:16px;z-index:2;
+  background:var(--gold);color:var(--navy);
+  font-size:.66rem;font-weight:700;letter-spacing:.16em;
+  padding:7px 13px;border-radius:4px;
+}
+.market-tag{
+  position:absolute;top:16px;right:16px;z-index:2;
+  background:rgba(10,22,40,.78);color:#fff;backdrop-filter:blur(4px);
+  font-size:.7rem;font-weight:600;letter-spacing:.06em;padding:7px 12px;border-radius:4px;
+}
+.card-view{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  transform:translateY(100%);transition:transform .4s var(--ease);
+}
+.card:hover .card-view,.card:focus-within .card-view{transform:translateY(0)}
+.card-view a{
+  display:block;text-align:center;background:var(--gold);color:var(--navy);
+  font-weight:700;font-size:.84rem;letter-spacing:.08em;padding:14px;
+}
+.card-view a:hover{background:var(--gold-dark)}
+.card-body{padding:24px 24px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.price{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--navy)}
+.price small{font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;color:var(--gold-dark);vertical-align:middle;margin-left:6px}
+.card-title{font-size:1.06rem;font-weight:600;color:var(--ink);font-family:'Inter',sans-serif}
+.card-loc{font-size:.86rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.card-loc i{color:var(--gold)}
+.stats{
+  display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;padding-top:16px;
+  border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);
+}
+.stats span{display:flex;align-items:center;gap:7px}
+.stats i{color:var(--gold-dark);font-size:.82rem}
+.listings-more{text-align:center;margin-top:52px}
+
+/* ============ 5. SERVICES ============ */
+.services{background:var(--navy);color:var(--white)}
+.services .section-head h2{color:var(--white)}
+.services .section-head p{color:rgba(255,255,255,.65)}
+.grid-services{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1024px){.grid-services{grid-template-columns:repeat(2,1fr)}}
+.svc{
+  background:var(--navy-2);border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius);padding:34px 28px;
+  transition:transform .35s var(--ease),border-color .35s,background .35s;
+  display:flex;flex-direction:column;
+}
+.svc:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.45);background:var(--navy-3)}
+.svc-icon{
+  width:54px;height:54px;border-radius:8px;display:grid;place-items:center;
+  background:rgba(201,168,76,.12);color:var(--gold);font-size:1.25rem;margin-bottom:22px;
+  border:1px solid rgba(201,168,76,.3);
+}
+.svc h3{color:var(--white);font-size:1.14rem;margin-bottom:10px}
+.svc p{color:rgba(255,255,255,.62);font-size:.9rem;flex:1}
+.svc-link{
+  margin-top:20px;color:var(--gold);font-size:.84rem;font-weight:600;letter-spacing:.05em;
+  display:inline-flex;align-items:center;gap:8px;transition:gap .3s var(--ease);
+}
+.svc-link:hover{gap:14px}
+
+/* ============ 6. ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:center}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:44px}}
+.about-photo{position:relative}
+.about-photo img{border-radius:var(--radius);box-shadow:var(--shadow-md);aspect-ratio:4/5;object-fit:cover;width:100%}
+.about-photo::before{
+  content:"";position:absolute;inset:22px -22px -22px 22px;
+  border:2px solid var(--gold);border-radius:var(--radius);z-index:-1;
+}
+.about-frame-tag{
+  position:absolute;bottom:26px;left:26px;background:var(--navy);color:#fff;
+  padding:16px 22px;border-radius:8px;box-shadow:var(--shadow-md);
+}
+.about-frame-tag strong{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.3rem;display:block;line-height:1.1}
+.about-frame-tag span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.gold-rule{width:64px;height:2px;background:var(--gold);margin:18px 0 26px}
+.about-text h2{font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:600}
+.about-text p{color:var(--muted);margin-bottom:16px;font-size:.98rem}
+.about-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  margin:34px 0;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+@media(max-width:640px){.about-stats{grid-template-columns:repeat(2,1fr)}}
+.about-stats strong{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--navy);display:block;line-height:1.15}
+.about-stats span{font-size:.74rem;color:var(--muted);letter-spacing:.04em}
+.about-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.socials{display:flex;gap:12px}
+.socials a{
+  width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;color:var(--navy);font-size:1rem;
+  transition:all .3s var(--ease);
+}
+.socials a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:translateY(-3px)}
+
+/* ============ 7. MARKETS ============ */
+.markets{background:var(--grey)}
+.grid-markets{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1024px){.grid-markets{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid-markets{grid-template-columns:1fr}}
+.market{
+  background:var(--white);border-radius:var(--radius);padding:32px 28px;
+  box-shadow:var(--shadow-sm);border-top:3px solid transparent;
+  transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;
+}
+.market:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-top-color:var(--gold)}
+.market .flag{font-size:2rem;line-height:1;margin-bottom:16px;display:block}
+.market h3{font-size:1.16rem;margin-bottom:8px}
+.market .cities{font-size:.86rem;color:var(--muted);margin-bottom:16px}
+.market .insight{
+  font-size:.8rem;color:var(--gold-dark);font-weight:500;font-style:italic;
+  padding-top:14px;border-top:1px dashed var(--line);display:flex;gap:9px;align-items:flex-start;
+}
+.market .insight i{margin-top:3px;font-size:.75rem}
+
+/* ============ 8. HOW IT WORKS ============ */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.step{position:relative;padding:0 22px;text-align:center}
+.step-num{
+  width:62px;height:62px;border-radius:50%;margin:0 auto 22px;
+  background:var(--white);border:2px solid var(--gold);color:var(--navy);
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;
+  display:grid;place-items:center;position:relative;z-index:2;
+  transition:background .35s,color .35s,transform .35s var(--ease);
+}
+.step:hover .step-num{background:var(--gold);transform:scale(1.08)}
+.step:not(:last-child)::after{
+  content:"";position:absolute;top:31px;left:calc(50% + 40px);right:calc(-50% + 40px);
+  border-top:2px dotted var(--gold);z-index:1;
+}
+.step .emoji{font-size:1.5rem;display:block;margin-bottom:10px}
+.step h3{font-size:1.08rem;margin-bottom:8px}
+.step p{font-size:.88rem;color:var(--muted)}
+@media(max-width:860px){
+  .steps{grid-template-columns:1fr;gap:0}
+  .step{display:grid;grid-template-columns:62px 1fr;gap:20px;text-align:left;padding:0 0 44px}
+  .step-num{margin:0}
+  .step .emoji{margin-bottom:6px}
+  .step:not(:last-child)::after{
+    top:70px;left:30px;right:auto;bottom:8px;width:0;
+    border-top:0;border-left:2px dotted var(--gold);
+  }
+}
+
+/* ============ 9. TESTIMONIALS ============ */
+.testimonials{background:var(--navy)}
+.testimonials .section-head h2{color:var(--white)}
+.testimonials .section-head p{color:rgba(255,255,255,.65)}
+.carousel{position:relative;max-width:860px;margin:0 auto;overflow:hidden}
+.track{display:flex;transition:transform .6s var(--ease)}
+.slide{flex:0 0 100%;padding:6px 8px}
+.tcard{
+  background:var(--navy-2);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);padding:44px 46px;text-align:center;
+}
+.tcard .quote-mark{font-family:'Playfair Display',serif;font-size:3.4rem;line-height:.6;color:var(--gold);display:block;margin-bottom:20px}
+.stars{color:var(--gold);font-size:.85rem;letter-spacing:4px;margin-bottom:20px}
+.tcard blockquote{
+  font-family:'Playfair Display',serif;font-style:italic;font-size:1.14rem;
+  color:rgba(255,255,255,.9);margin-bottom:28px;line-height:1.7;
+}
+.tmeta{display:flex;align-items:center;justify-content:center;gap:16px}
+.avatar{
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:var(--navy);font-weight:700;font-size:.95rem;
+  display:grid;place-items:center;letter-spacing:.02em;
+}
+.tmeta .who{text-align:left}
+.tmeta .who strong{color:var(--white);font-size:.95rem;display:block}
+.tmeta .who span{color:rgba(255,255,255,.6);font-size:.8rem}
+.car-controls{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:34px}
+.car-btn{
+  width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);
+  background:transparent;color:var(--white);font-size:.9rem;
+  transition:all .3s var(--ease);
+}
+.car-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.dots{display:flex;gap:10px}
+.dot{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.28);transition:all .3s;padding:0}
+.dot.active{background:var(--gold);width:26px;border-radius:5px}
+@media(max-width:640px){.tcard{padding:34px 24px}.tcard blockquote{font-size:1.02rem}}
+
+/* ============ 10. FAQ ============ */
+.faq-list{max-width:820px;margin:0 auto}
+.faq{border-bottom:1px solid var(--line)}
+.faq:first-child{border-top:1px solid var(--line)}
+.faq-q{
+  width:100%;background:none;border:0;text-align:left;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 6px;font-size:1.02rem;font-weight:600;color:var(--navy);
+  font-family:'Inter',sans-serif;transition:color .25s;
+}
+.faq-q:hover{color:var(--gold-dark)}
+.faq-q .fx{
+  flex:0 0 34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--gold-dark);font-size:.8rem;
+  transition:transform .35s var(--ease),background .35s,color .35s;
+}
+.faq.open .fx{transform:rotate(45deg);background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.faq-a p{padding:0 6px 26px;color:var(--muted);font-size:.94rem;max-width:92%}
+
+/* ============ 11. CONTACT ============ */
+.contact{background:var(--grey)}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:start}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.form-card{
+  background:var(--white);border-radius:var(--radius);padding:40px;
+  box-shadow:var(--shadow-sm);border-top:3px solid var(--gold);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+.form-card .field{margin-bottom:18px}
+.phone-group{display:grid;grid-template-columns:118px 1fr;gap:10px}
+.form-card textarea{
+  width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:6px;
+  font-family:'Inter',sans-serif;font-size:.92rem;resize:vertical;min-height:120px;
+  transition:border-color .25s,box-shadow .25s;
+}
+.form-card textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.18)}
+.form-card .btn{width:100%}
+.form-success{
+  display:none;margin-top:16px;padding:14px 16px;border-radius:6px;
+  background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.4);
+  color:#157A3C;font-size:.88rem;
+}
+.form-success.show{display:block}
+.contact-side{display:flex;flex-direction:column;gap:14px}
+.cinfo{
+  background:var(--white);border-radius:var(--radius);padding:24px 26px;
+  box-shadow:var(--shadow-sm);display:flex;gap:18px;align-items:flex-start;
+}
+.cinfo .ci{
+  flex:0 0 46px;height:46px;border-radius:8px;display:grid;place-items:center;
+  background:rgba(201,168,76,.13);color:var(--gold-dark);font-size:1.05rem;
+}
+.cinfo h4{font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.cinfo p{font-size:.92rem;color:var(--ink);line-height:1.6}
+.cinfo a{color:var(--navy);font-weight:500}
+.cinfo a:hover{color:var(--gold-dark)}
+.contact-side .btn{width:100%}
+
+/* ============ PROPERTY DETAIL PAGE ============ */
+.detail-page{display:none;padding:140px 0 100px;background:var(--white)}
+body.detail-open .detail-page{display:block}
+body.detail-open .hero,
+body.detail-open .search-wrap,
+body.detail-open section.section{display:none}
+.back-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:none;border:0;color:var(--muted);font-family:'Inter',sans-serif;
+  font-size:.86rem;font-weight:600;letter-spacing:.05em;padding:0;margin-bottom:28px;
+  transition:color .25s,gap .3s var(--ease);
+}
+.back-btn:hover{color:var(--gold-dark);gap:15px}
+.detail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}
+.detail-tags{display:flex;gap:10px;margin-bottom:14px}
+.tag{font-size:.66rem;font-weight:700;letter-spacing:.14em;padding:7px 13px;border-radius:4px;text-transform:uppercase}
+.tag.gold{background:var(--gold);color:var(--navy)}
+.tag.navy{background:var(--navy);color:var(--white)}
+.tag.line{border:1px solid var(--line);color:var(--muted)}
+.detail-head h1{font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:600;margin-bottom:10px}
+.detail-loc{color:var(--muted);font-size:.95rem;display:flex;align-items:center;gap:9px}
+.detail-loc i{color:var(--gold)}
+.detail-price-wrap{text-align:right}
+.detail-price{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--navy);line-height:1.1}
+.detail-price-note{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dark);font-weight:600}
+@media(max-width:640px){.detail-price-wrap{text-align:left}}
+
+/* Gallery */
+.gallery{margin:36px 0 46px}
+.gallery-main{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;background:var(--grey)}
+.gallery-main img{width:100%;height:100%;object-fit:cover;transition:opacity .35s var(--ease)}
+.gallery-main img.fading{opacity:0}
+.g-counter{
+  position:absolute;right:18px;bottom:18px;background:rgba(10,22,40,.75);backdrop-filter:blur(4px);
+  color:#fff;font-size:.76rem;font-weight:600;letter-spacing:.08em;padding:8px 14px;border-radius:5px;
+}
+.g-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:46px;height:46px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.92);color:var(--navy);font-size:.9rem;
+  display:grid;place-items:center;transition:all .3s var(--ease);box-shadow:var(--shadow-sm);
+}
+.g-arrow:hover{background:var(--gold);transform:translateY(-50%) scale(1.06)}
+.g-arrow.prev{left:18px}.g-arrow.next{right:18px}
+.gallery-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px}
+.gallery-thumbs button{
+  border:2px solid transparent;border-radius:8px;overflow:hidden;padding:0;
+  aspect-ratio:4/3;background:var(--grey);opacity:.65;
+  transition:opacity .3s,border-color .3s,transform .3s var(--ease);
+}
+.gallery-thumbs button img{width:100%;height:100%;object-fit:cover}
+.gallery-thumbs button:hover{opacity:1;transform:translateY(-3px)}
+.gallery-thumbs button.active{opacity:1;border-color:var(--gold)}
+@media(max-width:640px){.gallery-thumbs{grid-template-columns:repeat(5,1fr);gap:8px}.g-arrow{width:38px;height:38px}}
+
+/* Detail layout */
+.detail-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start}
+@media(max-width:960px){.detail-grid{grid-template-columns:1fr}}
+.dsection{margin-bottom:48px}
+.dsection h2{font-size:1.45rem;font-weight:600;margin-bottom:8px}
+.dsection .gold-rule{margin:12px 0 22px;width:48px}
+.dsection p{color:var(--muted);font-size:.96rem;margin-bottom:14px}
+
+/* Quick stats bar */
+.quick-stats{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:8px;
+  background:var(--grey);border-radius:var(--radius);padding:24px 18px;margin-bottom:46px;
+}
+@media(max-width:760px){.quick-stats{grid-template-columns:repeat(3,1fr);row-gap:22px}}
+.qstat{text-align:center}
+.qstat i{color:var(--gold-dark);font-size:1.1rem;margin-bottom:8px;display:block}
+.qstat strong{display:block;font-size:.98rem;color:var(--navy);line-height:1.2}
+.qstat span{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Features */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px 22px}
+@media(max-width:760px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.feat-grid{grid-template-columns:1fr}}
+.feat{display:flex;align-items:center;gap:11px;font-size:.9rem;color:var(--ink)}
+.feat i{color:var(--gold-dark);font-size:.8rem;flex:0 0 auto}
+
+/* Details table */
+.dtable{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.dtable .drow{
+  display:grid;grid-template-columns:1fr 1fr;padding:14px 20px;font-size:.9rem;
+}
+.dtable .drow:nth-child(odd){background:var(--grey)}
+.dtable .drow span:first-child{color:var(--muted);font-weight:500}
+.dtable .drow span:last-child{color:var(--navy);font-weight:600}
+
+/* Map placeholder */
+.map-ph{
+  position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:21/9;
+  background:
+    linear-gradient(rgba(10,22,40,.88),rgba(16,31,53,.92)),
+    repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(201,168,76,.14) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(201,168,76,.14) 40px),
+    var(--navy);
+  display:grid;place-items:center;text-align:center;color:#fff;padding:24px;
+}
+.map-ph i{font-size:2rem;color:var(--gold);margin-bottom:12px;display:block}
+.map-ph strong{font-family:'Playfair Display',serif;font-size:1.15rem;display:block;margin-bottom:6px}
+.map-ph span{font-size:.82rem;color:rgba(255,255,255,.65)}
+@media(max-width:640px){.map-ph{aspect-ratio:16/10}}
+
+/* Sidebar agent card */
+.detail-side{position:sticky;top:110px;display:flex;flex-direction:column;gap:16px}
+@media(max-width:960px){.detail-side{position:static}}
+.agent-card{
+  background:var(--white);border:1px solid var(--line);border-top:3px solid var(--gold);
+  border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-sm);
+}
+.agent-top{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.agent-top img{width:66px;height:66px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.agent-top strong{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);display:block}
+.agent-top span{font-size:.78rem;color:var(--muted)}
+.agent-lines{border-top:1px solid var(--line);padding-top:16px;margin-bottom:20px}
+.agent-lines p{font-size:.86rem;color:var(--muted);margin-bottom:9px;display:flex;align-items:center;gap:10px}
+.agent-lines i{color:var(--gold-dark);width:16px}
+.agent-lines a{color:var(--navy);font-weight:500}
+.agent-lines a:hover{color:var(--gold-dark)}
+.agent-card .btn{width:100%;margin-bottom:10px;padding:13px 22px;font-size:.85rem}
+.agent-card .btn:last-child{margin-bottom:0}
+.enquiry-card{
+  background:var(--grey);border-radius:var(--radius);padding:26px;
+}
+.enquiry-card h3{font-size:1.05rem;margin-bottom:16px}
+.enquiry-card .field{margin-bottom:12px}
+.enquiry-card input,.enquiry-card textarea{
+  width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:6px;background:var(--white);
+  font-family:'Inter',sans-serif;font-size:.88rem;transition:border-color .25s,box-shadow .25s;
+}
+.enquiry-card textarea{resize:vertical;min-height:86px}
+.enquiry-card input:focus,.enquiry-card textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.18)}
+.enquiry-card .btn{width:100%}
+.enquiry-success{display:none;margin-top:12px;font-size:.84rem;color:#157A3C}
+.enquiry-success.show{display:block}
+
+/* Similar properties */
+.similar{margin-top:26px;padding-top:56px;border-top:1px solid var(--line)}
+.similar h2{font-size:1.6rem;font-weight:600;margin-bottom:34px}
+
+/* ============ 12. FOOTER ============ */
+.footer{background:var(--navy);color:rgba(255,255,255,.72);padding:80px 0 0}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px;padding-bottom:56px}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+.footer .brand-name{font-size:1.3rem}
+.footer-about{font-size:.88rem;margin-top:18px;max-width:300px;color:rgba(255,255,255,.6)}
+.footer h4{
+  color:var(--white);font-family:'Inter',sans-serif;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;
+}
+.footer ul li{margin-bottom:11px}
+.footer ul a{font-size:.9rem;color:rgba(255,255,255,.65);transition:color .25s,padding-left .25s}
+.footer ul a:hover{color:var(--gold);padding-left:5px}
+.footer .socials{margin-top:22px}
+.footer .socials a{border-color:rgba(255,255,255,.2);color:var(--white)}
+.footer .socials a:hover{color:var(--navy)}
+.footer-bar{
+  border-top:1px solid rgba(255,255,255,.1);padding:24px 0;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:.82rem;color:rgba(255,255,255,.5);
+}
+.footer-bar a{color:rgba(255,255,255,.5)}
+.footer-bar a:hover{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<!-- ============ 1. NAVIGATION ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="brand" aria-label="Harrington Property Group — home">
+      <span class="brand-name">Harrington <span>Property Group</span></span>
+      <span class="brand-rule"></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#listings">Listings</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-gold nav-cta">Book a Call</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#listings">Listings</a>
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="btn btn-gold">Book a Call</a>
+</div>
+
+<!-- ============ 2. HERO ============ -->
+<section class="hero" id="home">
+  <div class="container hero-inner">
+    <span class="hero-kicker">International Luxury Real Estate</span>
+    <h1>Find Your Next Home.<br><em>Anywhere in the World.</em></h1>
+    <p class="hero-sub">Luxury &amp; residential property specialist serving AU&nbsp;·&nbsp;US&nbsp;·&nbsp;UK&nbsp;·&nbsp;Gulf</p>
+    <div class="hero-ctas">
+      <a href="#listings" class="btn btn-gold">View Listings <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#contact" class="btn btn-outline-light">Book a Free Consultation</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="em">🏆</span> 12 Years Experience</div>
+      <div class="trust-item"><span class="em">🌍</span> 4 Markets</div>
+      <div class="trust-item"><span class="em">✅</span> 340+ Deals Closed</div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ============ 3. SEARCH BAR ============ -->
+<div class="search-wrap">
+  <div class="container">
+    <form class="search-card" id="searchForm" aria-label="Property search">
+      <div class="field">
+        <label for="s-loc">Location</label>
+        <input type="text" id="s-loc" placeholder="City, suburb or region">
+      </div>
+      <div class="field">
+        <label for="s-type">Property Type</label>
+        <select id="s-type">
+          <option>House</option><option>Apartment</option>
+          <option>Villa</option><option>Commercial</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="s-budget">Budget Range</label>
+        <select id="s-budget">
+          <option>Under $500K</option><option>$500K – $1M</option>
+          <option>$1M – $3M</option><option>$3M – $10M</option><option>$10M+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <div class="toggle" id="statusToggle">
+          <button type="button" class="active">Buy</button>
+          <button type="button">Rent</button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-gold"><i class="fa-solid fa-magnifying-glass"></i> Search Properties</button>
+    </form>
+    <p class="search-note" id="searchNote"></p>
+  </div>
+</div>
+
+<!-- ============ 4. FEATURED LISTINGS ============ -->
+<section class="section listings" id="listings">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Featured Properties</h2>
+      <p>Hand-selected listings across our key markets</p>
+    </div>
+    <div class="grid-listings">
+
+      <article class="card reveal">
+        <div class="card-media">
+          <span class="badge">FEATURED</span>
+          <span class="market-tag">🇦🇺 Sydney</span>
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80" alt="Mosman Waterfront Villa exterior at dusk" loading="lazy">
+          <div class="card-view"><a href="#contact">View Property</a></div>
+        </div>
+        <div class="card-body">
+          <div class="price">AUD 1,250,000</div>
+          <div class="card-title">Mosman Waterfront Villa</div>
+          <div class="card-loc"><i class="fa-solid fa-location-dot"></i> Mosman, Sydney NSW, Australia</div>
+          <div class="stats">
+            <span><i class="fa-solid fa-bed"></i> 4 Beds</span>
+            <span><i class="fa-solid fa-bath"></i> 3 Baths</span>
+            <span><i class="fa-solid fa-car"></i> 2 Garage</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> 420 sqm</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal d1">
+        <div class="card-media">
+          <span class="badge">FEATURED</span>
+          <span class="market-tag">🇺🇸 Miami</span>
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Brickell Bay modern residence with pool" loading="lazy">
+          <div class="card-view"><a href="#contact">View Property</a></div>
+        </div>
+        <div class="card-body">
+          <div class="price">USD 895,000</div>
+          <div class="card-title">Brickell Bay Residence</div>
+          <div class="card-loc"><i class="fa-solid fa-location-dot"></i> Brickell, Miami FL, United States</div>
+          <div class="stats">
+            <span><i class="fa-solid fa-bed"></i> 3 Beds</span>
+            <span><i class="fa-solid fa-bath"></i> 2 Baths</span>
+            <span><i class="fa-solid fa-car"></i> 2 Garage</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> 2,340 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal d2">
+        <div class="card-media">
+          <span class="badge">FEATURED</span>
+          <span class="market-tag">🇬🇧 London</span>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Kensington Garden Townhouse facade" loading="lazy">
+          <div class="card-view"><a href="#contact">View Property</a></div>
+        </div>
+        <div class="card-body">
+          <div class="price">GBP 720,000</div>
+          <div class="card-title">Kensington Garden Townhouse</div>
+          <div class="card-loc"><i class="fa-solid fa-location-dot"></i> Kensington, London, United Kingdom</div>
+          <div class="stats">
+            <span><i class="fa-solid fa-bed"></i> 3 Beds</span>
+            <span><i class="fa-solid fa-bath"></i> 2 Baths</span>
+            <span><i class="fa-solid fa-car"></i> 1 Garage</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> 1,780 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-media">
+          <span class="badge">FEATURED</span>
+          <span class="market-tag">🇦🇪 Dubai</span>
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Palm Jumeirah Sky Penthouse interior" loading="lazy">
+          <div class="card-view"><a href="#contact">View Property</a></div>
+        </div>
+        <div class="card-body">
+          <div class="price">AED 2,400,000</div>
+          <div class="card-title">Palm Jumeirah Sky Penthouse</div>
+          <div class="card-loc"><i class="fa-solid fa-location-dot"></i> Palm Jumeirah, Dubai, UAE</div>
+          <div class="stats">
+            <span><i class="fa-solid fa-bed"></i> 3 Beds</span>
+            <span><i class="fa-solid fa-bath"></i> 4 Baths</span>
+            <span><i class="fa-solid fa-car"></i> 2 Garage</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> 310 sqm</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal d1">
+        <div class="card-media">
+          <span class="badge">FEATURED</span>
+          <span class="market-tag">🇸🇦 Riyadh</span>
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" alt="Al Nakheel contemporary villa with courtyard pool" loading="lazy">
+          <div class="card-view"><a href="#contact">View Property</a></div>
+        </div>
+        <div class="card-body">
+          <div class="price">SAR 3,150,000</div>
+          <div class="card-title">Al Nakheel Courtyard Villa</div>
+          <div class="card-loc"><i class="fa-solid fa-location-dot"></i> Al Nakheel, Riyadh, Saudi Arabia</div>
+          <div class="stats">
+            <span><i class="fa-solid fa-bed"></i> 5 Beds</span>
+            <span><i class="fa-solid fa-bath"></i> 5 Baths</span>
+            <span><i class="fa-solid fa-car"></i> 3 Garage</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> 560 sqm</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal d2">
+        <div class="card-media">
+          <span class="badge">FEATURED</span>
+          <span class="market-tag">🇬🇧 Manchester</span>
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80" alt="Deansgate riverside apartment building" loading="lazy">
+          <div class="card-view"><a href="#contact">View Property</a></div>
+        </div>
+        <div class="card-body">
+          <div class="price">GBP 385,000</div>
+          <div class="card-title">Deansgate Riverside Apartment</div>
+          <div class="card-loc"><i class="fa-solid fa-location-dot"></i> Deansgate, Manchester, United Kingdom</div>
+          <div class="stats">
+            <span><i class="fa-solid fa-bed"></i> 2 Beds</span>
+            <span><i class="fa-solid fa-bath"></i> 2 Baths</span>
+            <span><i class="fa-solid fa-car"></i> 1 Garage</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> 1,050 sqft</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="listings-more reveal">
+      <a href="#contact" class="btn btn-outline-navy">View All Listings <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Services</span>
+      <h2>How We Help You</h2>
+      <p>End-to-end representation across four international markets</p>
+    </div>
+    <div class="grid-services">
+      <div class="svc reveal">
+        <div class="svc-icon"><i class="fa-solid fa-house-chimney"></i></div>
+        <h3>Buyer Representation</h3>
+        <p>We negotiate on your behalf across every market — protecting your interests from first viewing to final signature.</p>
+        <a class="svc-link" href="#contact">Learn More <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+      <div class="svc reveal d1">
+        <div class="svc-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Property Investment Advisory</h3>
+        <p>Data-driven strategy for portfolio growth, with yield analysis and market timing across AU, US, UK and the Gulf.</p>
+        <a class="svc-link" href="#contact">Learn More <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+      <div class="svc reveal d2">
+        <div class="svc-icon"><i class="fa-solid fa-earth-asia"></i></div>
+        <h3>Relocation Services</h3>
+        <p>Seamless moves across AU, US, UK and Gulf — schools, visas, logistics and neighbourhood matching handled.</p>
+        <a class="svc-link" href="#contact">Learn More <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+      <div class="svc reveal d3">
+        <div class="svc-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+        <h3>Rental Management</h3>
+        <p>Hands-off property management for investors — tenanting, maintenance and reporting, wherever you are.</p>
+        <a class="svc-link" href="#contact">Learn More <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-photo reveal">
+      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80" alt="James Harrington, principal agent, in a tailored suit">
+      <div class="about-frame-tag">
+        <strong>AUD 280M+</strong>
+        <span>Career Sales Volume</span>
+      </div>
+    </div>
+    <div class="about-text reveal d1">
+      <span class="eyebrow">Your Agent</span>
+      <h2>About James Harrington</h2>
+      <div class="gold-rule"></div>
+      <p>James Harrington has spent twelve years guiding buyers, sellers and investors through some of the world's most competitive property markets. What began in Sydney's harbourside suburbs has grown into a truly international practice spanning Australia, the United States, the United Kingdom and the Gulf region.</p>
+      <p>James specialises in high-net-worth clients — expatriates, investors and relocating families who need a single trusted advisor across borders. His network of vetted local partners, from conveyancers in London to escrow officers in Miami, means every transaction runs to one standard: his.</p>
+      <p>Fluent in the local nuances of each market — foreign-buyer rules in Australia, leasehold structures in the UK, freehold zones in Dubai — James turns cross-border complexity into a clear, confident path to keys in hand.</p>
+      <div class="about-stats">
+        <div><strong>340+</strong><span>Properties Sold</span></div>
+        <div><strong>12</strong><span>Years Experience</span></div>
+        <div><strong>4</strong><span>Countries Active</span></div>
+        <div><strong>AUD 280M+</strong><span>In Sales</span></div>
+      </div>
+      <div class="about-actions">
+        <a href="#" class="btn btn-outline-navy"><i class="fa-solid fa-file-arrow-down"></i> Download Agent Profile PDF</a>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. MARKET COVERAGE ============ -->
+<section class="section markets">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Coverage</span>
+      <h2>Markets We Operate In</h2>
+      <p>Local expertise, international standards — in four of the world's most dynamic property regions</p>
+    </div>
+    <div class="grid-markets">
+      <div class="market reveal">
+        <span class="flag">🇦🇺</span>
+        <h3>Australia</h3>
+        <p class="cities">Sydney · Melbourne · Gold Coast</p>
+        <p class="insight"><i class="fa-solid fa-arrow-trend-up"></i> Lifestyle-driven demand with resilient long-term capital growth</p>
+      </div>
+      <div class="market reveal d1">
+        <span class="flag">🇺🇸</span>
+        <h3>United States</h3>
+        <p class="cities">Miami · New York · Los Angeles</p>
+        <p class="insight"><i class="fa-solid fa-arrow-trend-up"></i> Deep liquidity and strong appeal for international investors</p>
+      </div>
+      <div class="market reveal d2">
+        <span class="flag">🇬🇧</span>
+        <h3>United Kingdom</h3>
+        <p class="cities">London · Manchester · Edinburgh</p>
+        <p class="insight"><i class="fa-solid fa-arrow-trend-up"></i> Prime-central prestige plus high-yield regional cities</p>
+      </div>
+      <div class="market reveal d3">
+        <span class="flag">🌍</span>
+        <h3>Gulf Region</h3>
+        <p class="cities">Dubai · Riyadh · Doha · Abu Dhabi</p>
+        <p class="insight"><i class="fa-solid fa-arrow-trend-up"></i> Strong rental yields, tax-efficient and foreign buyer-friendly</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. HOW IT WORKS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Process</span>
+      <h2>Your Journey, Simplified</h2>
+      <p>One clear path from first call to keys in hand — wherever in the world you're buying</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div>
+          <span class="emoji">📞</span>
+          <h3>Free Consultation</h3>
+          <p>Tell us your goals and budget</p>
+        </div>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">2</div>
+        <div>
+          <span class="emoji">🔍</span>
+          <h3>Property Matching</h3>
+          <p>We shortlist the best options for you</p>
+        </div>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">3</div>
+        <div>
+          <span class="emoji">🏠</span>
+          <h3>Viewings &amp; Negotiation</h3>
+          <p>Virtual or in-person, we handle it all</p>
+        </div>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num">4</div>
+        <div>
+          <span class="emoji">✅</span>
+          <h3>Keys in Hand</h3>
+          <p>Settlement, paperwork and beyond</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. TESTIMONIALS ============ -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow" style="color:var(--gold-light)">Testimonials</span>
+      <h2>What Our Clients Say</h2>
+      <p>Clients from Sydney to Dubai trust Harrington Property Group</p>
+    </div>
+    <div class="carousel reveal" id="carousel">
+      <div class="track" id="track">
+        <div class="slide">
+          <div class="tcard">
+            <span class="quote-mark">&ldquo;</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>James found us a waterfront home we'd been chasing for two years. He negotiated below the guide price in one of Sydney's hottest markets — I still don't know how he did it.</blockquote>
+            <div class="tmeta">
+              <div class="avatar">SM</div>
+              <div class="who"><strong>Sarah M. 🇦🇺</strong><span>Waterfront home · Sydney, Australia</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="tcard">
+            <span class="quote-mark">&ldquo;</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>Buying in London from Dubai felt impossible until I met James. He handled the solicitors, the survey, everything — my investment property completed without me ever leaving the UAE.</blockquote>
+            <div class="tmeta">
+              <div class="avatar">AR</div>
+              <div class="who"><strong>Ahmed Al-Rashidi 🇦🇪</strong><span>Investment property in London · Dubai, UAE</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="tcard">
+            <span class="quote-mark">&ldquo;</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>Relocating from the UK to Miami with two kids was daunting. James coordinated the schools, the neighbourhood shortlist and the closing timeline. We felt looked after at every step.</blockquote>
+            <div class="tmeta">
+              <div class="avatar">JM</div>
+              <div class="who"><strong>Jennifer &amp; Mark T. 🇺🇸</strong><span>Relocated from the UK · Miami, United States</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="tcard">
+            <span class="quote-mark">&ldquo;</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>As a first-time buyer I had a hundred questions. James answered every single one, walked me through each stage, and got me the keys to my Manchester apartment ahead of schedule.</blockquote>
+            <div class="tmeta">
+              <div class="avatar">PK</div>
+              <div class="who"><strong>Priya K. 🇬🇧</strong><span>First-time buyer · Manchester, United Kingdom</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="tcard">
+            <span class="quote-mark">&ldquo;</span>
+            <div class="stars">★★★★★</div>
+            <blockquote>James built me a portfolio of three Dubai properties with a blended yield I couldn't find on my own. His market analysis is the sharpest I've seen — and I've worked with many agents.</blockquote>
+            <div class="tmeta">
+              <div class="avatar">KF</div>
+              <div class="who"><strong>Khalid Al-Farsi 🇸🇦</strong><span>Portfolio of 3 Dubai properties · Riyadh, Saudi Arabia</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" id="prevBtn" aria-label="Previous testimonial"><i class="fa-solid fa-arrow-left"></i></button>
+        <div class="dots" id="dots" role="tablist" aria-label="Testimonial slides"></div>
+        <button class="car-btn" id="nextBtn" aria-label="Next testimonial"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. FAQ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything international buyers ask us — answered plainly</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Do you work with international buyers who have never visited the property?
+          <span class="fx"><i class="fa-solid fa-plus"></i></span></button>
+        <div class="faq-a"><p>Yes — a large share of our clients purchase sight-unseen. We provide live video walkthroughs, independent building and pest reports, drone footage of the street and surrounds, and a written condition summary before you commit. Your local legal representative reviews every document before exchange.</p></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">What are your fees and how are you compensated?
+          <span class="fx"><i class="fa-solid fa-plus"></i></span></button>
+        <div class="faq-a"><p>For buyer representation we charge a fixed engagement fee plus a success fee on settlement, agreed in writing before we begin. In some markets, sell-side commissions offset part of this. There are no hidden referral fees — any partner arrangements are disclosed upfront.</p></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Can you help with mortgage or financing in another country?
+          <span class="fx"><i class="fa-solid fa-plus"></i></span></button>
+        <div class="faq-a"><p>We're not lenders, but we work with mortgage brokers in each market who specialise in non-resident and expat lending. We'll introduce you early so pre-approval is in place before we make offers — often the difference between winning and losing a competitive property.</p></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">How do viewings work for overseas clients?
+          <span class="fx"><i class="fa-solid fa-plus"></i></span></button>
+        <div class="faq-a"><p>We attend every shortlisted property in person and run a scheduled live video call from the property, in your time zone. You'll get a recorded walkthrough, our honest notes on condition and street appeal, and comparable sales data — the same brief we'd give a client standing next to us.</p></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Which payment methods do you accept?
+          <span class="fx"><i class="fa-solid fa-plus"></i></span></button>
+        <div class="faq-a"><p>Professional fees are payable by bank transfer in AUD, USD, GBP, AED or SAR. Property purchase funds always flow through the regulated channel for that market — trust accounts, escrow, or solicitor client accounts — never through us directly. We can also introduce FX specialists to reduce currency-conversion costs.</p></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">How long does the buying process take in each market?
+          <span class="fx"><i class="fa-solid fa-plus"></i></span></button>
+        <div class="faq-a"><p>As a guide: Australia typically settles in 4–6 weeks from exchange; the US closes in 30–45 days; the UK averages 8–12 weeks due to conveyancing chains; Dubai off-plan can complete in days, with resale transfers around 2–4 weeks. We map your exact timeline in the first consultation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Start the Conversation</h2>
+      <p>Tell us what you're looking for — we'll reply within one business day</p>
+    </div>
+    <div class="contact-grid">
+      <form class="form-card reveal" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="c-name">Full Name</label>
+            <input type="text" id="c-name" placeholder="Your full name" required>
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="c-phone">Phone</label>
+            <div class="phone-group">
+              <select id="c-code" aria-label="Country code">
+                <option>🇦🇺 +61</option><option>🇺🇸 +1</option>
+                <option>🇬🇧 +44</option><option>🇦🇪 +971</option>
+                <option>🇸🇦 +966</option><option>🇶🇦 +974</option>
+              </select>
+              <input type="tel" id="c-phone" placeholder="400 000 000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="c-market">Market of Interest</label>
+            <select id="c-market">
+              <option>Australia</option><option>United States</option>
+              <option>United Kingdom</option><option>Gulf Region</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" placeholder="Tell us about your goals, budget and timeline…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold"><i class="fa-regular fa-paper-plane"></i> Send Message</button>
+        <div class="form-success" id="formSuccess"><i class="fa-solid fa-circle-check"></i> Thank you — your message has been received. James will be in touch within one business day.</div>
+      </form>
+      <div class="contact-side">
+        <div class="cinfo reveal d1">
+          <div class="ci"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:+61290000000">+61 2 9000 0000</a> (AU)<br><a href="tel:+97140000000">+971 4 000 0000</a> (UAE)</p>
+          </div>
+        </div>
+        <div class="cinfo reveal d2">
+          <div class="ci"><i class="fa-regular fa-envelope"></i></div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:james@harringtonproperty.com">james@harringtonproperty.com</a></p>
+          </div>
+        </div>
+        <div class="cinfo reveal d3">
+          <div class="ci"><i class="fa-regular fa-clock"></i></div>
+          <div>
+            <h4>Office Hours</h4>
+            <p>Mon–Fri 9am–6pm (AEST)<br>Sun–Thu 10am–7pm (GST)</p>
+          </div>
+        </div>
+        <a href="#" class="btn btn-whatsapp reveal d3"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+        <a href="#" class="btn btn-gold reveal d4"><i class="fa-regular fa-calendar-check"></i> Book a 15-min Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROPERTY DETAIL PAGE ============ -->
+<main class="detail-page" id="detailPage" aria-live="polite">
+  <div class="container">
+    <button class="back-btn" id="backBtn"><i class="fa-solid fa-arrow-left-long"></i> Back to Listings</button>
+
+    <div class="detail-head">
+      <div>
+        <div class="detail-tags">
+          <span class="tag gold">Featured</span>
+          <span class="tag navy" id="dStatus">For Sale</span>
+          <span class="tag line" id="dType">Villa</span>
+        </div>
+        <h1 id="dTitle">Property Title</h1>
+        <p class="detail-loc"><i class="fa-solid fa-location-dot"></i> <span id="dLoc">Location</span></p>
+      </div>
+      <div class="detail-price-wrap">
+        <div class="detail-price" id="dPrice">—</div>
+        <div class="detail-price-note">Guide Price</div>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <div class="gallery-main">
+        <img id="galleryMain" src="" alt="Property photo">
+        <button class="g-arrow prev" id="gPrev" aria-label="Previous photo"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="g-arrow next" id="gNext" aria-label="Next photo"><i class="fa-solid fa-chevron-right"></i></button>
+        <span class="g-counter" id="gCounter">1 / 5</span>
+      </div>
+      <div class="gallery-thumbs" id="galleryThumbs"></div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-main">
+        <div class="quick-stats" id="quickStats"></div>
+
+        <div class="dsection">
+          <h2 class="serif">About This Property</h2>
+          <div class="gold-rule"></div>
+          <div id="dDesc"></div>
+        </div>
+
+        <div class="dsection">
+          <h2 class="serif">Features &amp; Amenities</h2>
+          <div class="gold-rule"></div>
+          <div class="feat-grid" id="dFeatures"></div>
+        </div>
+
+        <div class="dsection">
+          <h2 class="serif">Property Details</h2>
+          <div class="gold-rule"></div>
+          <div class="dtable" id="dTable"></div>
+        </div>
+
+        <div class="dsection">
+          <h2 class="serif">Location</h2>
+          <div class="gold-rule"></div>
+          <div class="map-ph">
+            <div>
+              <i class="fa-solid fa-location-dot"></i>
+              <strong id="dMapTitle">Neighbourhood</strong>
+              <span id="dMapNote">Exact address shared with qualified buyers on enquiry.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="detail-side">
+        <div class="agent-card">
+          <div class="agent-top">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" alt="James Harrington">
+            <div>
+              <strong>James Harrington</strong>
+              <span>Principal Agent · Harrington Property Group</span>
+            </div>
+          </div>
+          <div class="agent-lines">
+            <p><i class="fa-solid fa-phone"></i> <a href="tel:+61290000000">+61 2 9000 0000</a></p>
+            <p><i class="fa-regular fa-envelope"></i> <a href="mailto:james@harringtonproperty.com">james@harringtonproperty.com</a></p>
+            <p><i class="fa-regular fa-clock"></i> Replies within one business day</p>
+          </div>
+          <a href="#" class="btn btn-gold" id="dViewingBtn"><i class="fa-regular fa-calendar-check"></i> Request a Viewing</a>
+          <a href="#" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+        </div>
+
+        <div class="enquiry-card">
+          <h3 class="serif">Enquire About This Property</h3>
+          <form id="enquiryForm">
+            <div class="field"><input type="text" id="e-name" placeholder="Full name" required aria-label="Full name"></div>
+            <div class="field"><input type="email" id="e-email" placeholder="Email address" required aria-label="Email address"></div>
+            <div class="field"><textarea id="e-msg" aria-label="Message"></textarea></div>
+            <button type="submit" class="btn btn-gold"><i class="fa-regular fa-paper-plane"></i> Send Enquiry</button>
+            <p class="enquiry-success" id="enquirySuccess"><i class="fa-solid fa-circle-check"></i> Enquiry sent — James will be in touch shortly.</p>
+          </form>
+        </div>
+      </aside>
+    </div>
+
+    <div class="similar">
+      <h2 class="serif">Similar Properties</h2>
+      <div class="grid-listings" id="similarGrid"></div>
+    </div>
+  </div>
+</main>
+
+<!-- ============ 12. FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="brand">
+          <span class="brand-name">Harrington <span>Property Group</span></span>
+          <span class="brand-rule"></span>
+        </a>
+        <p class="footer-about">Luxury &amp; residential property representation across Australia, the United States, the United Kingdom and the Gulf region.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#listings">Listings</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About James</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our Markets</h4>
+        <ul>
+          <li><a href="#listings">Australia</a></li>
+          <li><a href="#listings">United States</a></li>
+          <li><a href="#listings">United Kingdom</a></li>
+          <li><a href="#listings">Gulf Region</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licence Information</a></li>
+          <li><a href="#">Complaints Procedure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© 2026 Harrington Property Group · <a href="#">Privacy Policy</a> · All Rights Reserved</span>
+      <span>AU · US · UK · Gulf</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ NAV: solid after 80px ============ */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 80 || document.body.classList.contains('detail-open'));
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ============ Mobile hamburger ============ */
+const burger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function toggleMenu(force){
+  const open = force !== undefined ? force : !mobileMenu.classList.contains('open');
+  mobileMenu.classList.toggle('open', open);
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+burger.addEventListener('click', () => toggleMenu());
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+/* ============ Intersection Observer reveals ============ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ============ Search bar (UI only) ============ */
+const statusToggle = document.getElementById('statusToggle');
+statusToggle.querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    statusToggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+document.getElementById('searchForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const loc = document.getElementById('s-loc').value.trim() || 'all locations';
+  const type = document.getElementById('s-type').value;
+  const budget = document.getElementById('s-budget').value;
+  const status = statusToggle.querySelector('.active').textContent;
+  const note = document.getElementById('searchNote');
+  note.textContent = `Searching ${type.toLowerCase()}s to ${status.toLowerCase()} in ${loc} · ${budget} — scroll down to view featured matches.`;
+  note.classList.add('show');
+  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
+});
+
+/* ============ Testimonial carousel ============ */
+const track = document.getElementById('track');
+const slides = track.children.length;
+const dotsWrap = document.getElementById('dots');
+let index = 0, timer;
+
+for(let i = 0; i < slides; i++){
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+  d.addEventListener('click', () => { go(i); restart(); });
+  dotsWrap.appendChild(d);
+}
+const dots = [...dotsWrap.children];
+
+function go(i){
+  index = (i + slides) % slides;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach((d, k) => d.classList.toggle('active', k === index));
+}
+function restart(){
+  clearInterval(timer);
+  timer = setInterval(() => go(index + 1), 4000);
+}
+document.getElementById('prevBtn').addEventListener('click', () => { go(index - 1); restart(); });
+document.getElementById('nextBtn').addEventListener('click', () => { go(index + 1); restart(); });
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('mouseenter', () => clearInterval(timer));
+carousel.addEventListener('mouseleave', restart);
+restart();
+
+/* Touch swipe for carousel */
+let startX = null;
+carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+carousel.addEventListener('touchend', e => {
+  if(startX === null) return;
+  const dx = e.changedTouches[0].clientX - startX;
+  if(Math.abs(dx) > 50){ go(index + (dx < 0 ? 1 : -1)); restart(); }
+  startX = null;
+}, {passive:true});
+
+/* ============ FAQ accordion ============ */
+document.querySelectorAll('.faq').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq.open').forEach(o => {
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight = null;
+      o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollHeight + 'px';
+      q.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+/* ============ PROPERTY DATA ============ */
+const U = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1400&q=80`;
+const properties = [
+  {
+    id:'mosman-waterfront-villa', flag:'🇦🇺', market:'Sydney',
+    title:'Mosman Waterfront Villa', loc:'Mosman, Sydney NSW, Australia',
+    price:'AUD 1,250,000', status:'For Sale', type:'Villa',
+    beds:4, baths:3, garage:2, area:'420 sqm', land:'610 sqm', year:2018,
+    images:[U('photo-1613490493576-7fde63acd811'),U('photo-1600210492486-724fe5c67fb0'),U('photo-1600585154526-990dced4db0d'),U('photo-1600573472592-401b489a3cdc'),U('photo-1600566752355-35792bedcfea')],
+    desc:[
+      'Positioned on one of Mosman\u2019s most tightly held waterfront streets, this architect-designed villa captures uninterrupted views across Middle Harbour from nearly every room. Floor-to-ceiling glazing, wide-board oak floors and a double-height entry void give the home a sense of light and scale rarely found this close to the city.',
+      'The lower level flows out to a heated infinity-edge pool and travertine terrace \u2014 an entertainer\u2019s platform above the water. Upstairs, the master suite occupies its own wing with a dressing room, marble ensuite and private balcony facing the sunrise over the harbour.',
+      'Minutes to Balmoral Beach, elite schools and the Mosman village caf\u00e9 strip, with a 15-minute commute to the Sydney CBD. Properties of this calibre on this street trade privately and rarely \u2014 early inspection is strongly advised.'
+    ],
+    features:['Uninterrupted harbour views','Heated infinity-edge pool','Double-height entry void','Marble master ensuite','Smart home automation','Wine cellar & tasting nook','Ducted reverse-cycle A/C','Outdoor kitchen & BBQ terrace','Secure double garage + storage','Landscaped low-maintenance gardens','CCTV & alarm system','Solar with battery storage'],
+    details:{'Property ID':'HPG-AU-0142','Property Type':'Detached Villa','Status':'For Sale','Year Built':'2018','Internal Area':'420 sqm','Land Size':'610 sqm','Bedrooms':'4','Bathrooms':'3','Parking':'2-car garage + off-street','Council':'Mosman Municipal Council','Tenure':'Freehold (Torrens title)','Foreign Buyers':'FIRB approval required'},
+    mapTitle:'Mosman, Lower North Shore', mapNote:'Moments to Balmoral Beach and Mosman village. Exact address shared with qualified buyers on enquiry.'
+  },
+  {
+    id:'brickell-bay-residence', flag:'🇺🇸', market:'Miami',
+    title:'Brickell Bay Residence', loc:'Brickell, Miami FL, United States',
+    price:'USD 895,000', status:'For Sale', type:'Apartment',
+    beds:3, baths:2, garage:2, area:'2,340 sqft', land:'—', year:2021,
+    images:[U('photo-1512917774080-9991f1c4c750'),U('photo-1522708323590-d24dbb6b0267'),U('photo-1560448204-e02f11c3d0e2'),U('photo-1600607687920-4e2a09cf159d'),U('photo-1600121848594-d8644e57abab')],
+    desc:[
+      'A corner residence on the 38th floor of one of Brickell\u2019s newest towers, with wraparound floor-to-ceiling glass framing Biscayne Bay to the east and the downtown skyline to the north. The open-plan living zone flows onto a deep terrace \u2014 morning coffee over the water, evening drinks over the city lights.',
+      'The Italian-designed kitchen features integrated Sub-Zero and Wolf appliances, a waterfall-edge island and a full butler\u2019s pantry. Both secondary bedrooms enjoy bay glimpses, while the primary suite adds a spa bathroom with freestanding tub and a fitted walk-in wardrobe.',
+      'Building amenities include a resort pool deck, private cinema, co-working lounge and 24-hour concierge. Brickell City Centre, the financial district and Miami\u2019s best dining are all within a five-minute walk \u2014 a genuine lock-and-leave for international owners.'
+    ],
+    features:['38th-floor corner position','Wraparound bay & skyline views','Sub-Zero / Wolf kitchen','Deep entertaining terrace','Resort-style pool deck','Private residents\u2019 cinema','24-hour concierge & valet','Co-working lounge','2 assigned parking bays','Hurricane-rated glazing','Pet-friendly building','Strong short-stay rental policy'],
+    details:{'Property ID':'HPG-US-0287','Property Type':'Condominium','Status':'For Sale','Year Built':'2021','Internal Area':'2,340 sqft','HOA Fees':'USD 1,480 / month','Bedrooms':'3','Bathrooms':'2','Parking':'2 assigned bays','Floor':'38 of 54','Tenure':'Condo (fee simple)','Foreign Buyers':'No restrictions'},
+    mapTitle:'Brickell, Downtown Miami', mapNote:'Five minutes on foot to Brickell City Centre and the Metromover. Exact unit number shared on enquiry.'
+  },
+  {
+    id:'kensington-garden-townhouse', flag:'🇬🇧', market:'London',
+    title:'Kensington Garden Townhouse', loc:'Kensington, London, United Kingdom',
+    price:'GBP 720,000', status:'For Sale', type:'House',
+    beds:3, baths:2, garage:1, area:'1,780 sqft', land:'—', year:1897,
+    images:[U('photo-1600585154340-be6161a56a0c'),U('photo-1600607688969-a5bfcd646154'),U('photo-1600585152220-90363fe7e115'),U('photo-1600210492486-724fe5c67fb0'),U('photo-1600566752355-35792bedcfea')],
+    desc:[
+      'A beautifully restored Victorian townhouse on a quiet, tree-lined Kensington terrace, blending period bones \u2014 original cornicing, sash windows, a cast-iron fireplace \u2014 with a crisp contemporary renovation completed in 2023.',
+      'The lower-ground level has been opened into a full-width kitchen and dining space with Crittall-style doors onto a landscaped south-facing courtyard garden. Upstairs, the first-floor drawing room retains its full ceiling height and twin sash windows, while the top floor hosts a peaceful principal bedroom with fitted wardrobes and a marble shower room.',
+      'Kensington High Street, Holland Park and two Underground lines are within an eight-minute walk. A rare freehold at this price point in one of London\u2019s most consistently resilient postcodes.'
+    ],
+    features:['Freehold Victorian terrace','Renovated throughout (2023)','South-facing courtyard garden','Original cornicing & sash windows','Crittall-style garden doors','Underfloor heating (lower ground)','Bespoke fitted joinery','Marble shower room','Residents\u2019 parking permit zone','8 min walk to Underground','Holland Park nearby','Chain-free sale'],
+    details:{'Property ID':'HPG-UK-0198','Property Type':'Terraced House','Status':'For Sale','Year Built':'1897 (renovated 2023)','Internal Area':'1,780 sqft','EPC Rating':'C','Bedrooms':'3','Bathrooms':'2','Parking':'Permit zone + 1 garage','Council Tax':'Band F (RBKC)','Tenure':'Freehold','Foreign Buyers':'No restrictions (SDLT surcharge applies)'},
+    mapTitle:'Kensington, Royal Borough', mapNote:'Eight minutes on foot to High Street Kensington station. Street name shared with qualified buyers.'
+  },
+  {
+    id:'palm-jumeirah-sky-penthouse', flag:'🇦🇪', market:'Dubai',
+    title:'Palm Jumeirah Sky Penthouse', loc:'Palm Jumeirah, Dubai, UAE',
+    price:'AED 2,400,000', status:'For Sale', type:'Penthouse',
+    beds:3, baths:4, garage:2, area:'310 sqm', land:'—', year:2022,
+    images:[U('photo-1600607687939-ce8a6c25118c'),U('photo-1560448204-e02f11c3d0e2'),U('photo-1600573472592-401b489a3cdc'),U('photo-1600607687920-4e2a09cf159d'),U('photo-1522708323590-d24dbb6b0267')],
+    desc:[
+      'Crowning a boutique tower on the trunk of Palm Jumeirah, this half-floor penthouse looks across the Arabian Gulf to the Dubai Marina skyline. A private lift lobby opens into a 12-metre great room where sliding glass walls dissolve entirely into the sky terrace.',
+      'The terrace itself is the showpiece: a private plunge pool, outdoor lounge and dining for ten, all facing the sunset. Inside, the specification is uncompromising \u2014 book-matched marble, Gaggenau appliances, a dedicated study and a principal suite with dual dressing rooms.',
+      'Freehold ownership, zero annual property tax and gross yields on the Palm consistently among Dubai\u2019s strongest make this equally compelling as a residence or an income asset. Vacant on transfer.'
+    ],
+    features:['Private sky terrace & plunge pool','Half-floor layout, private lift lobby','Full sea & Marina skyline views','Gaggenau kitchen','Book-matched marble finishes','Dual dressing rooms in primary suite','Dedicated study / 4th-bed option','Beach club membership included','2 basement parking bays','24/7 security & concierge','Freehold zone \u2014 0% property tax','Vacant on transfer'],
+    details:{'Property ID':'HPG-AE-0331','Property Type':'Penthouse','Status':'For Sale','Year Built':'2022','Internal Area':'310 sqm','Service Charge':'AED 22 / sqft / yr','Bedrooms':'3 (+study)','Bathrooms':'4','Parking':'2 basement bays','View':'Sea & Marina skyline','Tenure':'Freehold','Foreign Buyers':'Fully eligible \u2014 Golden Visa qualifying'},
+    mapTitle:'Palm Jumeirah, Dubai', mapNote:'Trunk location, minutes to Nakheel Mall and the West Beach strip. Tower name shared on enquiry.'
+  },
+  {
+    id:'al-nakheel-courtyard-villa', flag:'🇸🇦', market:'Riyadh',
+    title:'Al Nakheel Courtyard Villa', loc:'Al Nakheel, Riyadh, Saudi Arabia',
+    price:'SAR 3,150,000', status:'For Sale', type:'Villa',
+    beds:5, baths:5, garage:3, area:'560 sqm', land:'750 sqm', year:2023,
+    images:[U('photo-1600566753190-17f0baa2a6c3'),U('photo-1600585154526-990dced4db0d'),U('photo-1600566752355-35792bedcfea'),U('photo-1600210492486-724fe5c67fb0'),U('photo-1600573472592-401b489a3cdc')],
+    desc:[
+      'A newly completed contemporary villa in Al Nakheel, one of Riyadh\u2019s most sought-after northern districts, arranged around a shaded central courtyard with a private pool \u2014 a modern take on traditional Najdi courtyard living.',
+      'The ground floor separates formal majlis and family living wings, each with its own entrance, while a stone-clad kitchen anchors the everyday hub. Five ensuite bedrooms occupy the upper level, including a principal suite with courtyard-facing terrace. A self-contained driver\u2019s room and maid\u2019s quarters sit discreetly off the triple garage.',
+      'Al Nakheel places you minutes from KAFD, top international schools and the Riyadh Front. With Vision 2030 infrastructure transforming the north of the city, quality villas here are appreciating quickly \u2014 this one is ready for immediate occupation.'
+    ],
+    features:['Private courtyard pool','Separate formal majlis wing','5 ensuite bedrooms','Driver\u2019s & maid\u2019s quarters','Triple garage + gated forecourt','Stone-clad designer kitchen','Smart lighting & climate control','Roof terrace with city outlook','Elevator provision installed','District cooling ready','Minutes to KAFD','Brand new \u2014 never occupied'],
+    details:{'Property ID':'HPG-SA-0119','Property Type':'Detached Villa','Status':'For Sale','Year Built':'2023','Internal Area':'560 sqm','Land Size':'750 sqm','Bedrooms':'5 (all ensuite)','Bathrooms':'5 + guest WC','Parking':'3-car garage','District':'Al Nakheel, North Riyadh','Tenure':'Freehold','Foreign Buyers':'Eligible under premium residency rules'},
+    mapTitle:'Al Nakheel, North Riyadh', mapNote:'Minutes to KAFD and King Salman Park. Plot number shared with qualified buyers on enquiry.'
+  },
+  {
+    id:'deansgate-riverside-apartment', flag:'🇬🇧', market:'Manchester',
+    title:'Deansgate Riverside Apartment', loc:'Deansgate, Manchester, United Kingdom',
+    price:'GBP 385,000', status:'For Sale', type:'Apartment',
+    beds:2, baths:2, garage:1, area:'1,050 sqft', land:'—', year:2020,
+    images:[U('photo-1600047509807-ba8f99d2cdde'),U('photo-1522708323590-d24dbb6b0267'),U('photo-1560448204-e02f11c3d0e2'),U('photo-1600121848594-d8644e57abab'),U('photo-1600607688969-a5bfcd646154')],
+    desc:[
+      'A bright, dual-aspect two-bedroom apartment on the 14th floor of a landmark Deansgate development, with the River Irwell below and open views west toward Salford Quays. Full-height glazing runs the length of the living space, opening to a winter garden usable year-round.',
+      'Both bedrooms are genuine doubles with fitted storage; the principal adds a sleek ensuite. The building offers a residents\u2019 gym, rooftop terrace, secure parking and a staffed concierge \u2014 the amenity package tenants in this market actively pay a premium for.',
+      'Deansgate is Manchester\u2019s strongest rental micro-market, with gross yields around 6% and relentless demand from young professionals. Sold with the option of an existing management arrangement \u2014 a true turnkey investment or a superb city base.'
+    ],
+    features:['14th-floor dual aspect','Winter garden / enclosed balcony','River Irwell views','Residents\u2019 gym & rooftop terrace','24-hour concierge','Secure allocated parking','Fitted wardrobes to both bedrooms','~6% gross rental yield','Turnkey management available','5 min walk to Deansgate station','EWS1 certified building','Ideal buy-to-let or city base'],
+    details:{'Property ID':'HPG-UK-0244','Property Type':'Apartment','Status':'For Sale','Year Built':'2020','Internal Area':'1,050 sqft','Service Charge':'GBP 2,900 / yr','Bedrooms':'2','Bathrooms':'2','Parking':'1 allocated secure bay','Ground Rent':'Peppercorn','Tenure':'Leasehold \u2014 995 yrs','Foreign Buyers':'No restrictions (SDLT surcharge applies)'},
+    mapTitle:'Deansgate, Manchester', mapNote:'Five minutes on foot to Deansgate station and St John\u2019s. Apartment number shared on enquiry.'
+  }
+];
+
+/* ============ DETAIL PAGE ============ */
+const detailPage = document.getElementById('detailPage');
+const gMain = document.getElementById('galleryMain');
+const gThumbs = document.getElementById('galleryThumbs');
+const gCounter = document.getElementById('gCounter');
+let currentProp = null, gIndex = 0;
+
+function setGallery(i){
+  gIndex = (i + currentProp.images.length) % currentProp.images.length;
+  gMain.classList.add('fading');
+  setTimeout(() => {
+    gMain.src = currentProp.images[gIndex];
+    gMain.alt = `${currentProp.title} — photo ${gIndex + 1}`;
+    gMain.classList.remove('fading');
+  }, 160);
+  gCounter.textContent = `${gIndex + 1} / ${currentProp.images.length}`;
+  [...gThumbs.children].forEach((t, k) => t.classList.toggle('active', k === gIndex));
+}
+
+function statHTML(icon, val, label){
+  return `<div class="qstat"><i class="fa-solid ${icon}"></i><strong>${val}</strong><span>${label}</span></div>`;
+}
+
+function cardHTML(p, i){
+  return `<article class="card">
+    <div class="card-media">
+      <span class="badge">FEATURED</span>
+      <span class="market-tag">${p.flag} ${p.market}</span>
+      <img src="${p.images[0].replace('w=1400','w=900')}" alt="${p.title}" loading="lazy">
+      <div class="card-view"><a href="#" data-prop="${i}">View Property</a></div>
+    </div>
+    <div class="card-body">
+      <div class="price">${p.price}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-loc"><i class="fa-solid fa-location-dot"></i> ${p.loc}</div>
+      <div class="stats">
+        <span><i class="fa-solid fa-bed"></i> ${p.beds} Beds</span>
+        <span><i class="fa-solid fa-bath"></i> ${p.baths} Baths</span>
+        <span><i class="fa-solid fa-ruler-combined"></i> ${p.area}</span>
+      </div>
+    </div>
+  </article>`;
+}
+
+function openProperty(i, push = true){
+  currentProp = properties[i];
+  const p = currentProp;
+
+  document.getElementById('dTitle').textContent = p.title;
+  document.getElementById('dLoc').textContent = p.loc;
+  document.getElementById('dPrice').textContent = p.price;
+  document.getElementById('dStatus').textContent = p.status;
+  document.getElementById('dType').textContent = p.type;
+  document.title = `${p.title} — Harrington Property Group`;
+
+  gThumbs.innerHTML = p.images.map((src, k) =>
+    `<button aria-label="View photo ${k + 1}"><img src="${src.replace('w=1400','w=400')}" alt=""></button>`).join('');
+  [...gThumbs.children].forEach((t, k) => t.addEventListener('click', () => setGallery(k)));
+  gMain.src = p.images[0]; gMain.alt = `${p.title} — photo 1`;
+  gIndex = 0; gCounter.textContent = `1 / ${p.images.length}`;
+  gThumbs.children[0].classList.add('active');
+
+  document.getElementById('quickStats').innerHTML =
+    statHTML('fa-bed', p.beds, 'Bedrooms') +
+    statHTML('fa-bath', p.baths, 'Bathrooms') +
+    statHTML('fa-car', p.garage, 'Garage') +
+    statHTML('fa-ruler-combined', p.area, 'Internal') +
+    statHTML('fa-calendar', p.year, 'Year Built') +
+    statHTML('fa-building', p.type, 'Type');
+
+  document.getElementById('dDesc').innerHTML = p.desc.map(d => `<p>${d}</p>`).join('');
+  document.getElementById('dFeatures').innerHTML =
+    p.features.map(f => `<div class="feat"><i class="fa-solid fa-check"></i>${f}</div>`).join('');
+  document.getElementById('dTable').innerHTML =
+    Object.entries(p.details).map(([k, v]) => `<div class="drow"><span>${k}</span><span>${v}</span></div>`).join('');
+  document.getElementById('dMapTitle').textContent = p.mapTitle;
+  document.getElementById('dMapNote').textContent = p.mapNote;
+  document.getElementById('e-msg').value = `Hi James, I'd like more information about ${p.title} (${p.price}).`;
+  document.getElementById('enquirySuccess').classList.remove('show');
+
+  const others = properties.map((q, k) => k).filter(k => k !== i).slice(0, 3);
+  const simGrid = document.getElementById('similarGrid');
+  simGrid.innerHTML = others.map(k => cardHTML(properties[k], k)).join('');
+  simGrid.querySelectorAll('[data-prop]').forEach(a =>
+    a.addEventListener('click', e => { e.preventDefault(); openProperty(+a.dataset.prop); }));
+
+  document.body.classList.add('detail-open');
+  toggleMenu(false);
+  onScroll();
+  window.scrollTo({top:0, behavior:'auto'});
+  if(push) history.pushState({prop:i}, '', `#property/${p.id}`);
+}
+
+function closeDetail(push = true){
+  document.body.classList.remove('detail-open');
+  document.title = 'Harrington Property Group — Luxury Real Estate | AU · US · UK · Gulf';
+  onScroll();
+  if(push) history.pushState({}, '', '#listings');
+}
+
+document.getElementById('gPrev').addEventListener('click', () => setGallery(gIndex - 1));
+document.getElementById('gNext').addEventListener('click', () => setGallery(gIndex + 1));
+document.addEventListener('keydown', e => {
+  if(!document.body.classList.contains('detail-open')) return;
+  if(e.key === 'ArrowLeft') setGallery(gIndex - 1);
+  if(e.key === 'ArrowRight') setGallery(gIndex + 1);
+});
+
+document.getElementById('backBtn').addEventListener('click', () => {
+  closeDetail();
+  document.getElementById('listings').scrollIntoView();
+});
+
+/* Wire up the six featured cards (order matches the data array) */
+document.querySelectorAll('#listings .grid-listings .card').forEach((card, i) => {
+  const link = card.querySelector('.card-view a');
+  link.addEventListener('click', e => { e.preventDefault(); openProperty(i); });
+  card.querySelector('.card-media img').style.cursor = 'pointer';
+  card.querySelector('.card-media img').addEventListener('click', () => openProperty(i));
+});
+
+/* "Request a Viewing" jumps to the main contact form */
+document.getElementById('dViewingBtn').addEventListener('click', e => {
+  e.preventDefault();
+  const p = currentProp;
+  closeDetail();
+  document.getElementById('c-msg').value = `I'd like to arrange a viewing of ${p.title} (${p.price}).`;
+  document.getElementById('contact').scrollIntoView();
+});
+
+/* Nav + footer links close the detail view */
+document.querySelectorAll('.nav-links a, .mobile-menu a, .footer a[href^="#"], .nav .brand, .footer .brand').forEach(a => {
+  a.addEventListener('click', () => { if(document.body.classList.contains('detail-open')) closeDetail(); });
+});
+
+/* Browser back/forward + deep links (#property/slug) */
+window.addEventListener('popstate', e => {
+  if(e.state && typeof e.state.prop === 'number') openProperty(e.state.prop, false);
+  else closeDetail(false);
+});
+(function initRoute(){
+  const m = location.hash.match(/^#property\/(.+)$/);
+  if(m){
+    const i = properties.findIndex(p => p.id === m[1]);
+    if(i > -1) openProperty(i, false);
+  }
+})();
+
+/* Enquiry mini-form (UI only) */
+document.getElementById('enquiryForm').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('enquirySuccess').classList.add('show');
+  document.getElementById('e-name').value = '';
+  document.getElementById('e-email').value = '';
+});
+
+/* ============ Contact form (UI only) ============ */
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.add('show');
+  e.target.querySelectorAll('input, textarea').forEach(f => f.value = '');
+});
+</script>
+</body>
+</html>
