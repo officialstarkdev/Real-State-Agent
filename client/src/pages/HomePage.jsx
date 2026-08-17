@@ -6,34 +6,42 @@ import PropertyCard from '../components/PropertyCard';
 export default function HomePage() {
   const [properties, setProperties] = useState([]);
   const [services, setServices] = useState([]);
+  const [loadingProperties, setLoadingProperties] = useState(true);
+  const [loadingServices, setLoadingServices] = useState(true);
 
   useEffect(() => {
-  Promise.all([
-    API.get('/properties/featured'),
-    API.get('/services'),
-  ])
-    .then(([pRes, sRes]) => {
-      const propertiesData = Array.isArray(pRes.data)
-        ? pRes.data
-        : Array.isArray(pRes.data?.properties)
-          ? pRes.data.properties
-          : [];
+    setLoadingProperties(true);
+    API.get('/properties/featured')
+      .then((pRes) => {
+        const propertiesData = Array.isArray(pRes.data)
+          ? pRes.data
+          : Array.isArray(pRes.data?.properties)
+            ? pRes.data.properties
+            : [];
+        setProperties(propertiesData);
+      })
+      .catch((error) => {
+        console.error('Failed to load featured properties:', error);
+        setProperties([]);
+      })
+      .finally(() => setLoadingProperties(false));
 
-      const servicesData = Array.isArray(sRes.data)
-        ? sRes.data
-        : Array.isArray(sRes.data?.services)
-          ? sRes.data.services
-          : [];
-
-      setProperties(propertiesData);
-      setServices(servicesData);
-    })
-    .catch((error) => {
-      console.error('Failed to load homepage data:', error);
-      setProperties([]);
-      setServices([]);
-    });
-}, []);
+    setLoadingServices(true);
+    API.get('/services')
+      .then((sRes) => {
+        const servicesData = Array.isArray(sRes.data)
+          ? sRes.data
+          : Array.isArray(sRes.data?.services)
+            ? sRes.data.services
+            : [];
+        setServices(servicesData);
+      })
+      .catch((error) => {
+        console.error('Failed to load services:', error);
+        setServices([]);
+      })
+      .finally(() => setLoadingServices(false));
+  }, []);
 
   // Trigger reveal animations after data loads
   useEffect(() => {
@@ -43,7 +51,7 @@ export default function HomePage() {
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
-  }, [properties, services]);
+  }, [properties, services, loadingProperties, loadingServices]);
 
   return (
     <div className="page-transition">
@@ -81,14 +89,20 @@ export default function HomePage() {
             <h2>Featured Properties</h2>
             <p>Hand-selected listings across our key markets</p>
           </div>
-          <div className="grid-listings">
-            {Array.isArray(properties) && properties.slice(0, 4).map((p, i) => (
-              <PropertyCard key={p._id} property={p} index={i} />
-            ))}
-          </div>
-          <div className="listings-more reveal">
-            <Link to="/listings" className="btn btn-outline-navy">View All Listings <i className="fa-solid fa-arrow-right"></i></Link>
-          </div>
+          {loadingProperties ? (
+            <div className="loading"><div className="spinner"></div></div>
+          ) : (
+            <>
+              <div className="grid-listings">
+                {Array.isArray(properties) && properties.slice(0, 4).map((p, i) => (
+                  <PropertyCard key={p._id} property={p} index={i} />
+                ))}
+              </div>
+              <div className="listings-more reveal">
+                <Link to="/listings" className="btn btn-outline-navy">View All Listings <i className="fa-solid fa-arrow-right"></i></Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -100,19 +114,25 @@ export default function HomePage() {
             <h2>How We Help You</h2>
             <p>End-to-end representation across four international markets</p>
           </div>
-          <div className="grid-services">
-            {Array.isArray(services) && services.slice(0, 4).map((s, i) => (
-              <div key={s._id} className={`svc reveal ${i === 1 ? 'd1' : i === 2 ? 'd2' : i === 3 ? 'd3' : ''}`}>
-                <div className="svc-icon"><i className={`fa-solid ${s.icon}`}></i></div>
-                <h3>{s.title}</h3>
-                <p>{s.description}</p>
-                <Link className="svc-link" to="/services">{s.linkText || 'Learn More'} <i className="fa-solid fa-arrow-right-long"></i></Link>
+          {loadingServices ? (
+            <div className="loading"><div className="spinner"></div></div>
+          ) : (
+            <>
+              <div className="grid-services">
+                {Array.isArray(services) && services.slice(0, 4).map((s, i) => (
+                  <div key={s._id} className={`svc reveal ${i === 1 ? 'd1' : i === 2 ? 'd2' : i === 3 ? 'd3' : ''}`}>
+                    <div className="svc-icon"><i className={`fa-solid ${s.icon}`}></i></div>
+                    <h3>{s.title}</h3>
+                    <p>{s.description}</p>
+                    <Link className="svc-link" to="/services">{s.linkText || 'Learn More'} <i className="fa-solid fa-arrow-right-long"></i></Link>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="listings-more reveal" style={{ marginTop: '2.5rem', textAlign: 'center' }}>
-            <Link to="/services" className="btn btn-outline-navy">View All Services <i className="fa-solid fa-arrow-right"></i></Link>
-          </div>
+              <div className="listings-more reveal" style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+                <Link to="/services" className="btn btn-outline-navy">View All Services <i className="fa-solid fa-arrow-right"></i></Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import ListingsPage from './pages/ListingsPage';
 import PropertyDetailPage from './pages/PropertyDetailPage';
@@ -27,6 +28,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollToTop />
       {!isAdminPath && <Navbar />}
       <Routes>
         {/* Public Routes */}
